@@ -12,18 +12,18 @@ import java.sql.Connection;
 
 
 public class ProductoData {
-    private Conexion con=null;
+    private Connection con=null;
     
     public ProductoData(){
         
-        con = Conexion.getConection();
+        con =  Conexion.getConection();
     }
      
     public void RegistrarProducto(Producto producto){
     
         String sql= "INSERT INTO producto (nombreProducto,descripcion,precioActual,Stock) VALUES (?,?,?,?)";
         try{   
-            PreparedStatement ps = con
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, producto.getNombreProd());
             ps.setString(2, producto.getDescripcion());
             ps.setDouble(3, producto.getPrecioActual());
