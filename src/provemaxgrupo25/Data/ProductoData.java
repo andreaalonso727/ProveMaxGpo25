@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import provemaxgrupo25.Entidades.Producto;
+import java.sql.ResultSet;
+import java.sql.Connection;
+
 
 
 public class ProductoData {
@@ -19,16 +22,15 @@ public class ProductoData {
     public void RegistrarProducto(Producto producto){
     
         String sql= "INSERT INTO producto (nombreProducto,descripcion,precioActual,Stock) VALUES (?,?,?,?)";
-        try{
-            
-            PreparedStatement ps = con.PrepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try{   
+            PreparedStatement ps = con
             ps.setString(1, producto.getNombreProd());
             ps.setString(2, producto.getDescripcion());
-            ps.setInt(3, producto.getPrecioActual());
+            ps.setDouble(3, producto.getPrecioActual());
             ps.setInt(4, producto.getStock());
             ps.executeUpdate();
             
-            Resultset rs=ps.getGeneratedKeys();
+            ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()) {
                 producto.setIdProducto(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se Registro el producto con exito");
@@ -40,9 +42,9 @@ public class ProductoData {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto "+ex.getMessage());
     }catch(Exception e){
                 System.out.println(e);
-                {
+                
                        
-            }
+            
          }
     }
 }

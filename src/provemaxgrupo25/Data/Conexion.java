@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package provemaxgrupo25.Data;
-
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -41,7 +41,7 @@ public class Conexion {
         
         try {
             
-            con = DriverManager.getConnection("jdbc:mariadb://localhost/provemaxgrupo25","root","");
+            con = (Conexion) DriverManager.getConnection("jdbc:mariadb://localhost/provemaxgrupo25","root","");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Error de conecxion" + ex.getMessage());
         
