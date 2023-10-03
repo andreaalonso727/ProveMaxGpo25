@@ -27,21 +27,21 @@ public class Conexion {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"Clase Connection: Error al cargar Driver"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Clase Conexion: Error al cargar Driver"+ ex.getMessage());
         }
     
     }
-    public static Conexion getConection(){
+    public static Connection getConection(){
         
         //metodo statico para llavar x el main la connection de la bd
-        Conexion con=null;
+        Connection con=null;
         if (connection == null){
                 connection=new Conexion();
         }
         
         try {
             
-            con = (Conexion) DriverManager.getConnection("jdbc:mariadb://localhost/provemaxgrupo25","root","");
+            con =DriverManager.getConnection("jdbc:mariadb://localhost/provemaxgrupo25","root","");
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Error de conecxion" + ex.getMessage());
         
