@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2023 a las 00:42:00
+-- Tiempo de generación: 05-10-2023 a las 01:29:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -58,8 +58,8 @@ CREATE TABLE `producto` (
   `nombreProducto` varchar(100) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `precioActual` double NOT NULL,
-  `Stock` int(11) NOT NULL,
-  `estado` tinyint(4) NOT NULL
+  `stock` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -71,8 +71,10 @@ CREATE TABLE `producto` (
 CREATE TABLE `proveedor` (
   `idProveedor` int(11) NOT NULL,
   `razonSocial` varchar(100) NOT NULL,
+  `cuit` int(20) NOT NULL,
   `domicilio` varchar(100) NOT NULL,
-  `telefono` varchar(25) NOT NULL
+  `telefono` varchar(25) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -104,7 +106,8 @@ ALTER TABLE `producto`
 -- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD PRIMARY KEY (`idProveedor`);
+  ADD PRIMARY KEY (`idProveedor`),
+  ADD UNIQUE KEY `cuit` (`cuit`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -126,13 +129,13 @@ ALTER TABLE `detallecompra`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -150,12 +153,6 @@ ALTER TABLE `compra`
 ALTER TABLE `detallecompra`
   ADD CONSTRAINT `fk_idCompra` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`),
   ADD CONSTRAINT `fk_idProducto` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
-
---
--- Filtros para la tabla `proveedor`
---
-ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`idProveedor`) REFERENCES `compra` (`idProveedor`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

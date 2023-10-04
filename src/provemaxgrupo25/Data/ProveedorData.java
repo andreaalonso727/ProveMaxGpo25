@@ -22,12 +22,14 @@ public class ProveedorData {
      
     public void RegistrarProveedor(Proveedor proveedor){
     
-        String sql= "INSERT INTO proveedor (razonSocial,domicilio,telefomo) VALUES (?,?,?)";
+        String sql= "INSERT INTO proveedor (razonSocial, domicilio, telefono, cuit, estado) VALUES (?,?,?,?,?)";
         try{   
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
+            ps.setInt(4, proveedor.getCuit());
+            ps.setBoolean(5, true);
             
             ps.executeUpdate();
             
