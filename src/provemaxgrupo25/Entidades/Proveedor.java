@@ -13,23 +13,29 @@ public class Proveedor {
     
     private int idProveedor;
     private String razonSocial;
+    private int cuit;
     private String domicilio;
     private String telefono;
-
-    public Proveedor(int idProveedor, String razonSocial, String domicilio, String telefono) {
-        this.idProveedor = idProveedor;
-        this.razonSocial = razonSocial;
-        this.domicilio = domicilio;
-        this.telefono = telefono;
-    }
-
-    public Proveedor(String razonSocial, String domicilio, String telefono) {
-        this.razonSocial = razonSocial;
-        this.domicilio = domicilio;
-        this.telefono = telefono;
-    }
+    private boolean estado;
 
     public Proveedor() {
+    }
+
+    public Proveedor(String razonSocial, int cuit, String domicilio, String telefono, boolean estado) {
+        this.razonSocial = razonSocial;
+        this.cuit = cuit;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.estado = estado;
+    }
+
+    public Proveedor(int idProveedor, String razonSocial, int cuit, String domicilio, String telefono, boolean estado) {
+        this.idProveedor = idProveedor;
+        this.razonSocial = razonSocial;
+        this.cuit = cuit;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.estado = estado;
     }
 
     public int getIdProveedor() {
@@ -48,6 +54,14 @@ public class Proveedor {
         this.razonSocial = razonSocial;
     }
 
+    public int getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(int cuit) {
+        this.cuit = cuit;
+    }
+
     public String getDomicilio() {
         return domicilio;
     }
@@ -64,10 +78,20 @@ public class Proveedor {
         this.telefono = telefono;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "Proveedor{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + '}';
+        return "Proveedor{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", cuit=" + cuit + ", domicilio=" + domicilio + ", telefono=" + telefono + ", estado=" + estado + '}';
     }
+
+    
     
     
     
