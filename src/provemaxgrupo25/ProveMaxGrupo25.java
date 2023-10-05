@@ -18,23 +18,36 @@ public class ProveMaxGrupo25 {
      */
     public static void main(String[] args) {
         /*-----------------------------------------------------------------------------------------------------*/
-//        Producto producto = new Producto("Telele", "televisor 40 pulgadas con hdmi", 200000, 15, true);
-//        Producto producto1 = new Producto("Telelele", "televisor 30 pulgadas con hdmi", 100000, 10, false);
-//        
-//        ProductoData produdata = new ProductoData();
-//       
-//        
-//        pd.RegistrarProducto(producto);
+//        Producto producto = new Producto(5,"Microonda1", "Microonda Mas lindo de argentina", 60000, 15, false);
+//        Producto producto1 = new Producto("Microonda2", "Microondas 21", 10000, 22, false);
+        
+        ProductoData produdata = new ProductoData();
+       
+            //Registrar productos
+//        produdata.RegistrarProducto(producto);
+//        produdata.RegistrarProducto(producto1);
+            
+            //Modificar por el nombre cualquier producto
+//          produdata.ModificarProducto(producto);
+          
+            //Eliminar producto por el id
+//          produdata.EliminarProducto(producto);
+
+            //Listar productos
+            for (Producto prod : produdata.ListarProducto()) {
+                System.out.println(prod);
+        }
          /*----------------------------------------------------------------------------------------------*/
             
 //            Proveedor proveedor = new Proveedor("Fravega", 21123456, "Bs As - Tulimanrea", "1102234566", true);
 //            Proveedor proveedor1 = new Proveedor("Musimundo", 2034552345, "Tucuman - Nuñez Sagrado", "294532233", true);
+//            
 //            ProveedorData provedata = new ProveedorData();
 //            
 //            provedata.RegistrarProveedor(proveedor);
 //            provedata.RegistrarProveedor(proveedor1);
          /*----------------------------------------------------------------------------------------------*/
-
+         
     }
     
 }
