@@ -160,6 +160,8 @@ public class ProductoData {
         return productos;
     }
 
+/*⮚	Aquellos productos están por debajo del stock mínimo. Ej. ¿Qué productos debería incluir en mi próxima compra?
+producto*/
 
 
 
