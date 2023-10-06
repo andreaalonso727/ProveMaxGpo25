@@ -76,7 +76,8 @@ public void guardarDetalleCompra (DetalleCompra detcom ){
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null,"Error al modificar un Detalle de Compra");
             
-        }  
+        }
+ }    
     
 public DetalleCompra  buscarDetalle (int id){
             
