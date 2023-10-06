@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package provemaxgrupo25;
+import java.time.LocalDate;
 import provemaxgrupo25.Data.*;
 import provemaxgrupo25.Entidades.*;
 
@@ -21,7 +22,7 @@ public class ProveMaxGrupo25 {
 //        Producto producto = new Producto(5,"Microonda1", "Microonda Mas lindo de argentina", 60000, 15, false);
 //        Producto producto1 = new Producto("Microonda2", "Microondas 21", 10000, 22, false);
         
-        ProductoData produdata = new ProductoData();
+//        ProductoData produdata = new ProductoData();
        
             //Registrar productos
 //        produdata.RegistrarProducto(producto);
@@ -34,9 +35,9 @@ public class ProveMaxGrupo25 {
 //          produdata.EliminarProducto(producto);
 
             //Listar productos
-            for (Producto prod : produdata.ListarProducto()) {
-                System.out.println(prod);
-        }
+//            for (Producto prod : produdata.ListarProducto()) {
+//                System.out.println(prod);
+//        }
          /*----------------------------------------------------------------------------------------------*/
             
 //            Proveedor proveedor = new Proveedor("Fravega", 21123456, "Bs As - Tulimanrea", "1102234566", true);
@@ -48,6 +49,14 @@ public class ProveMaxGrupo25 {
 //            provedata.RegistrarProveedor(proveedor1);
          /*----------------------------------------------------------------------------------------------*/
          
+//         LocalDate f1 = LocalDate.of(2023, 9, 15);
+//        
+//         LocalDate f2 = LocalDate.of(2023, 10, 5);
+//         
+//         for (Producto prod : produdata.ProdEntrefechas(f1, f2)) {
+//             System.out.println(prod);
+//        }
+
     }
     
 }

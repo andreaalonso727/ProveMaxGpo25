@@ -8,10 +8,14 @@ import javax.swing.JOptionPane;
 import provemaxgrupo25.Entidades.Producto;
 import java.sql.ResultSet;
 import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import provemaxgrupo25.Entidades.Compra;
 
 
 
@@ -160,12 +164,47 @@ public class ProductoData {
         return productos;
     }
 
-/*⮚	Aquellos productos están por debajo del stock mínimo. Ej. ¿Qué productos debería incluir en mi próxima compra?
-producto*/
+/*Aquellos productos que sean los más comprados entre fechas. Ej. ¿Qué productos he comprado más entre f1 y f2?*/
 
+    public List<Producto> ProdEntrefechas(LocalDate f1, LocalDate f2){
+        String sql= "SELECT p.nombreProducto, p.stock, p.estado \n" +
+                    "FROM detallecompra dc \n" +
+                    "JOIN producto p ON dc.idProducto = p.idProducto\n" +
+                    "JOIN compra c ON dc.idCompra = c.idCompra\n" +
+                    "WHERE c.fecha BETWEEN ? AND ? AND estado = 1;";
+        
+        ArrayList<Producto> productos= new ArrayList<>();
+        
 
+        try {
+            
+            PreparedStatement ps=con.prepareStatement(sql);
+            
+            ps.setDate(1, Date.valueOf(f1));
+            ps.setDate(2, Date.valueOf(f2));
+            
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                Producto producto=new Producto();
+                
+                producto.setNombreProd(rs.getString("nombreProducto"));
+                producto.setEstado(rs.getBoolean("estado"));
+                producto.setStock(rs.getInt("stock"));
+                
+                productos.add(producto);
+                
+                
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar un producto");
+            
+        }
+        return productos;
+    }
 
-}
+    }
        
        
     
