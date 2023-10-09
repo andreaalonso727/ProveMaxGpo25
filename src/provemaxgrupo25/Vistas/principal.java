@@ -42,18 +42,24 @@ public class principal extends javax.swing.JFrame {
             }
         };
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem5 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem8 = new javax.swing.JCheckBoxMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jCheckBoxMenuItem6 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem7 = new javax.swing.JCheckBoxMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 0));
@@ -61,62 +67,68 @@ public class principal extends javax.swing.JFrame {
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.darkGray));
 
-        jMenu1.setText("Ingresar");
+        jMenu6.setText("Productos");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Productos");
-        jMenu1.add(jCheckBoxMenuItem1);
+        jMenuItem1.setText("Agregar Producto");
+        jMenu6.add(jMenuItem1);
 
-        jCheckBoxMenuItem2.setSelected(true);
-        jCheckBoxMenuItem2.setText("Proveedores");
-        jMenu1.add(jCheckBoxMenuItem2);
+        jMenuItem2.setText("Modificar Producto");
+        jMenu6.add(jMenuItem2);
 
-        jCheckBoxMenuItem3.setSelected(true);
-        jCheckBoxMenuItem3.setText("Compras");
-        jMenu1.add(jCheckBoxMenuItem3);
+        jMenuItem3.setText("Listar Producto");
+        jMenu6.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Ver");
-
-        jCheckBoxMenuItem4.setSelected(true);
-        jCheckBoxMenuItem4.setText("Productos");
-        jMenu2.add(jCheckBoxMenuItem4);
-
-        jCheckBoxMenuItem5.setSelected(true);
-        jCheckBoxMenuItem5.setText("Proveedores");
-        jMenu2.add(jCheckBoxMenuItem5);
-
-        jCheckBoxMenuItem8.setSelected(true);
-        jCheckBoxMenuItem8.setText("Compras");
-        jMenu2.add(jCheckBoxMenuItem8);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Consultar");
-
-        jCheckBoxMenuItem6.setSelected(true);
-        jCheckBoxMenuItem6.setText("Detalles de Compras");
-        jCheckBoxMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem4.setText("Producto por Fecha");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem6ActionPerformed(evt);
+                jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu4.add(jCheckBoxMenuItem6);
+        jMenu6.add(jMenuItem4);
 
-        jCheckBoxMenuItem7.setSelected(true);
-        jCheckBoxMenuItem7.setText("Proveedor por Producto");
-        jCheckBoxMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jCheckBoxMenuItem7);
+        jMenuItem5.setText("Producto entre Fechas");
+        jMenu6.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu4);
-
-        jMenu6.setText("Salir");
         jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("Proveedores");
+
+        jMenuItem6.setText("Agregar Proveedor");
+        jMenu7.add(jMenuItem6);
+
+        jMenuItem7.setText("Listar Proveedor");
+        jMenu7.add(jMenuItem7);
+
+        jMenuItem8.setText("Proveedor por Producto");
+        jMenu7.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu8.setText("Compras");
+
+        jMenuItem9.setText("Comprar a Proveedor");
+        jMenu8.add(jMenuItem9);
+
+        jMenuItem10.setText("Comprar Producto");
+        jMenu8.add(jMenuItem10);
+
+        jMenuItem11.setText("Comprobante de Compra");
+        jMenu8.add(jMenuItem11);
+
+        jMenuBar1.add(jMenu8);
+
+        jMenu9.setText("Ventas");
+
+        jMenuItem12.setText("Ingresar Ventas");
+        jMenu9.add(jMenuItem12);
+
+        jMenuItem13.setText("Listar Ventas");
+        jMenu9.add(jMenuItem13);
+
+        jMenuBar1.add(jMenu9);
+
+        jMenu10.setText("Salir");
+        jMenuBar1.add(jMenu10);
 
         setJMenuBar(jMenuBar1);
 
@@ -134,13 +146,9 @@ public class principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBoxMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem6ActionPerformed
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem6ActionPerformed
-
-    private void jCheckBoxMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem7ActionPerformed
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,19 +190,25 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem5;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
