@@ -5,7 +5,11 @@
  */
 package provemaxgrupo25.Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -29,7 +33,14 @@ public class principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagen/imgprincipal.jpg/"));
+        Image image = icon.getImage();
+        jDesktopPane1 = new javax.swing.JDesktopPane(){
+
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -47,13 +58,6 @@ public class principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 0));
         setIconImages(null);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/provemaxgrupo25/Vistas/58301252-electrodomésticos-fondo-con-la-imagen-de-los-aparatos-electrodomésticos-banner-para-su-empresa-o.jpg"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(300, 300));
-        jLabel1.setMinimumSize(new java.awt.Dimension(300, 300));
-        jLabel1.setPreferredSize(new java.awt.Dimension(500, 300));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 370));
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.darkGray));
 
@@ -116,6 +120,17 @@ public class principal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,21 +149,30 @@ public class principal extends javax.swing.JFrame {
         
         String U = "admin";
         String P = "grupo25";
+        
+        String User = "";
+        String Pass = "";
+        
+        boolean correcto = false;
+        
         JOptionPane.showMessageDialog(null,"Bienvenido a provemax\n"
                 + "Primero debemos verificar datos");
-        
-        String User = JOptionPane.showInputDialog("Ingrese usuario");
-        String Pass = JOptionPane.showInputDialog("Ingrese la clave");
-        
-        if(U.equals(User)){
-            if(P.equals(Pass)){
-            JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA!!");
+        do{
+            User = JOptionPane.showInputDialog("Ingrese usuario");
+            Pass = JOptionPane.showInputDialog("Ingrese la clave");
+
+            if(U.equals(User)){
+                if(P.equals(Pass)){
+                JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA!!");
+                correcto = true;
+                
+                }else{
+                    JOptionPane.showMessageDialog(null, "La contraseña es incorrecta","Error",JOptionPane.ERROR_MESSAGE);
+                }
             }else{
-                JOptionPane.showMessageDialog(null, "La contraseña es incorrecta","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El usuario es invalido","Error",JOptionPane.ERROR_MESSAGE);
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "El usuario es invalido","Error",JOptionPane.ERROR_MESSAGE);
-        }
+        }while(correcto == false);
                 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -166,7 +190,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
