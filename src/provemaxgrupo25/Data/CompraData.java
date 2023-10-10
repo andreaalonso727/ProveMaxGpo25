@@ -81,7 +81,7 @@ public class CompraData {
     public Compra buscarCompra (int id){
             
 
-        String sql="SELECT idCompra. idProveedor, fecha FROM compra WHERE idCompra =?";
+        String sql="SELECT idCompra, idProveedor, fecha FROM compra WHERE idCompra =?";
 
         Compra compra=null;
         
@@ -179,7 +179,7 @@ public class CompraData {
     
     
        /* Todos los productos de una compra en particular. Ej. ¿Qué productos he adquirido en mi última compra?
-        Aquellos productos que sean los más comprados entre fechas. Ej. ¿Qué productos he comprado más entre f1 y f2?*/
+       /* Aquellos productos que sean los más comprados entre fechas. Ej. ¿Qué productos he comprado más entre f1 y f2?*/
 
     
 }
