@@ -21,10 +21,10 @@ public class ProveMaxGrupo25 {
         /*-----------------------------------------------------------------------------------------------------*/
 //        Producto producto = new Producto(5,"Microonda1", "Microonda Mas lindo de argentina", 60000, 15, false);
 //        Producto producto1 = new Producto("Microonda2", "Microondas 21", 10000, 22, false);
-        
+//        
 //        ProductoData produdata = new ProductoData();
-       
-            //Registrar productos
+//       
+//            Registrar productos
 //        produdata.RegistrarProducto(producto);
 //        produdata.RegistrarProducto(producto1);
             
@@ -56,7 +56,7 @@ public class ProveMaxGrupo25 {
 //         for (Producto prod : produdata.ProdEntrefechas(f1, f2)) {
 //             System.out.println(prod);
 //        }
-
+            Compra com=new Compra(5, "2023-21-12");
     }
     
 }

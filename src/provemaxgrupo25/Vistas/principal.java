@@ -44,7 +44,6 @@ public class principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -53,8 +52,6 @@ public class principal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -72,13 +69,10 @@ public class principal extends javax.swing.JFrame {
         jMenuItem1.setText("Agregar Producto");
         jMenu6.add(jMenuItem1);
 
-        jMenuItem2.setText("Modificar Producto");
-        jMenu6.add(jMenuItem2);
-
-        jMenuItem3.setText("Listar Producto");
+        jMenuItem3.setText("Listar Productos");
         jMenu6.add(jMenuItem3);
 
-        jMenuItem4.setText("Producto por Fecha");
+        jMenuItem4.setText("Listar por Fecha");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -86,7 +80,7 @@ public class principal extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem4);
 
-        jMenuItem5.setText("Producto entre Fechas");
+        jMenuItem5.setText("Listar entre Fechas");
         jMenu6.add(jMenuItem5);
 
         jMenuBar1.add(jMenu6);
@@ -105,12 +99,6 @@ public class principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu7);
 
         jMenu8.setText("Compras");
-
-        jMenuItem9.setText("Comprar a Proveedor");
-        jMenu8.add(jMenuItem9);
-
-        jMenuItem10.setText("Comprar Producto");
-        jMenu8.add(jMenuItem10);
 
         jMenuItem11.setText("Comprobante de Compra");
         jMenu8.add(jMenuItem11);
@@ -198,17 +186,14 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
