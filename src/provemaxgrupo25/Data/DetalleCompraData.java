@@ -29,14 +29,15 @@ public class DetalleCompraData {
     
 public void guardarDetalleCompra (DetalleCompra detcom ){
     
-    String sql="INSERT INTO detalleCompra (cantidad, precioCosto,producto, compra) VALUES (?, ?, ?, ?)";
+    String sql="INSERT INTO detalleCompra (cantidad, precioCosto,idCompra, idProducto) VALUES (?, ?, ?, ?)";
     try {    
         PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         
         ps.setInt(1, detcom.getCantidad());
         ps.setDouble(2, detcom.getPrecioCosto());
-        ps.setInt(3, detcom.getProducto().getIdProducto());
-        ps.setInt(4, detcom.getCompra().getIdCompra());
+        ps.setInt(3, detcom.getCompra().getIdCompra());
+        ps.setInt(4, detcom.getProducto().getIdProducto());
+        
         
        
         ps.executeUpdate();
@@ -158,8 +159,8 @@ public DetalleCompra  buscarDetalle (int id){
     
     public List<DetalleCompra> listarProductoPorFecha (LocalDate fecha){
             
-        String sql="SELECT dc.idDetalleCompra, dc.cantidad, dc.precioCosto, dc.idProducto, dc.idCompra, c.fecha AS fechaCompra +"
-                + "FROM DetalleCompra dc INNER JOIN Compra c ON dc.idCompra = c.idCompra WHERE c.fecha=? ";
+        String sql="SELECT dc.idDetalleCompra, dc.cantidad, dc.precioCosto, dc.idProducto, dc.idCompra, c.fecha AS fechaCompra  + "
+                + "FROM DetalleCompra dc INNER JOIN Compra c ON dc.idCompra = c.idCompra WHERE c.fecha = ? ";
         
         ArrayList<DetalleCompra> listarProdXFchaCom= new ArrayList<>();
         

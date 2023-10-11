@@ -52,6 +52,7 @@ public class principal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
+
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -69,7 +70,9 @@ public class principal extends javax.swing.JFrame {
         jMenuItem1.setText("Agregar Producto");
         jMenu6.add(jMenuItem1);
 
+
         jMenuItem3.setText("Listar Productos");
+
         jMenu6.add(jMenuItem3);
 
         jMenuItem4.setText("Listar por Fecha");
@@ -99,6 +102,7 @@ public class principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu7);
 
         jMenu8.setText("Compras");
+
 
         jMenuItem11.setText("Comprobante de Compra");
         jMenu8.add(jMenuItem11);

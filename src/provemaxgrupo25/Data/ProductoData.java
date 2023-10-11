@@ -145,6 +145,9 @@ public class ProductoData {
             
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
+            
+            int stockMinimo= 10;
+            
             while(rs.next()){
                 Producto producto=new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
@@ -155,7 +158,13 @@ public class ProductoData {
                 
                 productos.add(producto);
                 
+                if (producto.getStock()< stockMinimo){
+                
+                System.out.println("Producto por debajo del Stock minimo" + producto.getNombreProd());
             }
+                
+                }
+                      
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al buscar un producto");
