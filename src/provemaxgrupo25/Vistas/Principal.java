@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author HP
  */
-public class principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form principal
      */
-    public principal() {
+    public Principal() {
         initComponents();
     }
 
@@ -35,7 +35,7 @@ public class principal extends javax.swing.JFrame {
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagen/imgprincipal.jpg/"));
         Image image = icon.getImage();
-        jDesktopPane1 = new javax.swing.JDesktopPane(){
+        jEscritorio = new javax.swing.JDesktopPane(){
 
             public void paintComponent(Graphics g){
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
@@ -49,11 +49,10 @@ public class principal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-
-        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -68,11 +67,14 @@ public class principal extends javax.swing.JFrame {
         jMenu6.setText("Productos");
 
         jMenuItem1.setText("Agregar Producto");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem1);
 
-
         jMenuItem3.setText("Listar Productos");
-
         jMenu6.add(jMenuItem3);
 
         jMenuItem4.setText("Listar por Fecha");
@@ -93,9 +95,6 @@ public class principal extends javax.swing.JFrame {
         jMenuItem6.setText("Agregar Proveedor");
         jMenu7.add(jMenuItem6);
 
-        jMenuItem7.setText("Listar Proveedor");
-        jMenu7.add(jMenuItem7);
-
         jMenuItem8.setText("Proveedor por Producto");
         jMenu7.add(jMenuItem8);
 
@@ -103,9 +102,16 @@ public class principal extends javax.swing.JFrame {
 
         jMenu8.setText("Compras");
 
+        jMenuItem14.setText("Ingresar Compra");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem14);
 
-        jMenuItem11.setText("Comprobante de Compra");
-        jMenu8.add(jMenuItem11);
+        jMenuItem15.setText("Detalle de Compra");
+        jMenu8.add(jMenuItem15);
 
         jMenuBar1.add(jMenu8);
 
@@ -128,11 +134,11 @@ public class principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
         );
 
         pack();
@@ -141,6 +147,24 @@ public class principal extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+jEscritorio.removeAll();
+        jEscritorio.repaint();
+        IngresarCompras iCompra=new IngresarCompras();
+        iCompra.setVisible(true);
+        jEscritorio.add(iCompra);
+        jEscritorio.moveToFront(iCompra);    
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    jEscritorio.removeAll();
+        jEscritorio.repaint();
+        IngresarProducto iProducto=new IngresarProducto();
+        iProducto.setVisible(true);
+        jEscritorio.add(iProducto);
+        jEscritorio.moveToFront(iProducto);  
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,13 +200,13 @@ public class principal extends javax.swing.JFrame {
                 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new principal().setVisible(true);
+                new Principal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jEscritorio;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
@@ -190,14 +214,14 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }
