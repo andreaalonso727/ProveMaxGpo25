@@ -5,6 +5,8 @@
  */
 package provemaxgrupo25.Vistas;
 
+import provemaxgrupo25.Entidades.Producto;
+
 /**
  *
  * @author HP
@@ -93,7 +95,7 @@ public class provedorPorProducto extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Productos> jComboBox1;
+    private javax.swing.JComboBox<Producto> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
