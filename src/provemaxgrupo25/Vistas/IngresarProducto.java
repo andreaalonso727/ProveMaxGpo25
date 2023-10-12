@@ -9,12 +9,12 @@ package provemaxgrupo25.Vistas;
  *
  * @author HP
  */
-public class ingresarProducto extends javax.swing.JInternalFrame {
+public class IngresarProducto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ingresarProducto
      */
-    public ingresarProducto() {
+    public IngresarProducto() {
         initComponents();
     }
 

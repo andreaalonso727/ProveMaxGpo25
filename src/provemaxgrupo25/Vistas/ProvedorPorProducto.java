@@ -11,12 +11,12 @@ import provemaxgrupo25.Entidades.Producto;
  *
  * @author HP
  */
-public class provedorPorProducto extends javax.swing.JInternalFrame {
+public class ProvedorPorProducto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form provedorPorProducto
      */
-    public provedorPorProducto() {
+    public ProvedorPorProducto() {
         initComponents();
     }
 

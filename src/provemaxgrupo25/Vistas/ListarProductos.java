@@ -9,12 +9,12 @@ package provemaxgrupo25.Vistas;
  *
  * @author HP
  */
-public class listarProductos extends javax.swing.JInternalFrame {
+public class ListarProductos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form listarProductos
      */
-    public listarProductos() {
+    public ListarProductos() {
         initComponents();
     }
 
