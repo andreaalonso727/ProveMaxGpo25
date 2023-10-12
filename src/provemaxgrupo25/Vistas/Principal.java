@@ -171,38 +171,38 @@ jEscritorio.removeAll();
      */
     public static void main(String args[]) {
         
-        String U = "admin";
-        String P = "grupo25";
-        
-        String User = "";
-        String Pass = "";
-        
-        boolean correcto = false;
-        
-        JOptionPane.showMessageDialog(null,"Bienvenido a provemax\n"
-                + "Primero debemos verificar datos");
-        do{
-            User = JOptionPane.showInputDialog("Ingrese usuario");
-            Pass = JOptionPane.showInputDialog("Ingrese la clave");
-
-            if(U.equals(User)){
-                if(P.equals(Pass)){
-                JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA!!");
-                correcto = true;
-                
-                }else{
-                    JOptionPane.showMessageDialog(null, "La contraseña es incorrecta","Error",JOptionPane.ERROR_MESSAGE);
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "El usuario es invalido","Error",JOptionPane.ERROR_MESSAGE);
-            }
-        }while(correcto == false);
-                
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
+//        String U = "admin";
+//        String P = "grupo25";
+//        
+//        String User = "";
+//        String Pass = "";
+//        
+//        boolean correcto = false;
+//        
+//        JOptionPane.showMessageDialog(null,"Bienvenido a provemax\n"
+//                + "Primero debemos verificar datos");
+//        do{
+//            User = JOptionPane.showInputDialog("Ingrese usuario");
+//            Pass = JOptionPane.showInputDialog("Ingrese la clave");
+//
+//            if(U.equals(User)){
+//                if(P.equals(Pass)){
+//                JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA!!");
+//                correcto = true;
+//                
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "La contraseña es incorrecta","Error",JOptionPane.ERROR_MESSAGE);
+//                }
+//            }else{
+//                JOptionPane.showMessageDialog(null, "El usuario es invalido","Error",JOptionPane.ERROR_MESSAGE);
+//            }
+//        }while(correcto == false);
+//                
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Principal().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
