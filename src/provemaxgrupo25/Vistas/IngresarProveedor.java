@@ -5,12 +5,17 @@
  */
 package provemaxgrupo25.Vistas;
 
+import java.sql.Date;
+import javax.swing.JOptionPane;
+import provemaxgrupo25.Entidades.Proveedor;
+import provemaxgrupo25.Data.ProveedorData;
+
 /**
  *
  * @author HP
  */
 public class IngresarProveedor extends javax.swing.JInternalFrame {
-
+    ProveedorData prod;
     /**
      * Creates new form ingresarProveedor
      */
@@ -36,7 +41,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         jtRazonSocial = new javax.swing.JTextField();
         jtDomicilio = new javax.swing.JTextField();
         jtTelef = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jrEstado = new javax.swing.JRadioButton();
         jBBuscar = new javax.swing.JButton();
         jBGuardar1 = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
@@ -103,7 +108,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1)
+                                    .addComponent(jrEstado)
                                     .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jtTelef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
@@ -149,7 +154,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jrEstado))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar1)
@@ -167,7 +172,23 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        // TODO add your handling code here:
+        try{
+            
+        int id = Integer.parseInt(jtCuit.getText());
+        Proveedor prov = prod.buscarProveedor(id);
+        
+        jtRazonSocial.setText(prov.getRazonSocial()+"");
+        jtDomicilio.setText(prov.getDomicilio());
+        jtTelef.setText(prov.getTelefono());
+        jrEstado.setSelected(prov.isEstado());
+        
+        
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error al buscar alumno");
+            jtCuit.setText("");
+        }catch(NullPointerException e){            
+            return;
+        }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
 
@@ -182,7 +203,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jrEstado;
     private javax.swing.JTextField jtCuit;
     private javax.swing.JTextField jtDomicilio;
     private javax.swing.JTextField jtRazonSocial;
