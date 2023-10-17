@@ -1,9 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package provemaxgrupo25.Vistas;
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.table.DefaultTableModel;
+import provemaxgrupo25.Data.ProductoData;
+import provemaxgrupo25.Entidades.Producto;
+
 
 /**
  *
@@ -11,12 +20,21 @@ package provemaxgrupo25.Vistas;
  */
 public class IngresarProducto extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ingresarProducto
-     */
+
+    private DefaultTableModel model;
+    private List<Producto> listaP;
+    private ProductoData pd;
+        
+        
+
     public IngresarProducto() {
         initComponents();
-    }
+        pd = new ProductoData();
+        limpiarCampos();
+
+
+   
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,16 +50,20 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+
+        jtfNombre = new javax.swing.JTextField();
+        jtfDescripcion = new javax.swing.JTextField();
+        jtfCantidad = new javax.swing.JTextField();
+        jtfPrecio = new javax.swing.JTextField();
+        jrbEstado = new javax.swing.JRadioButton();
+        jbBuscar = new javax.swing.JButton();
+        jbIngresar = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
+
+        
+
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar Producto"));
         setClosable(true);
@@ -58,24 +80,48 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+
+        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jtfNombreActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Buscar");
-
-        jButton2.setText("Ingresar");
-
-        jButton3.setText("Modificar");
-
-        jButton4.setText("Eliminar");
-
-        jButton5.setText("Salir");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jrbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jrbEstadoActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jbIngresar.setText("Ingresar");
+        jbIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIngresarActionPerformed(evt);
+            }
+        });
+
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setText("Eliminar");
+
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+
+         
             }
         });
 
@@ -93,9 +139,11 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(111, 111, 111)
-                                .addComponent(jButton3)
+
+                                .addComponent(jbModificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4))
+                                .addComponent(jbEliminar))
+
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -103,13 +151,15 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+                                        .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(26, 26, 26)
-                                        .addComponent(jButton1))
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jRadioButton1))))
+                                        .addComponent(jbBuscar))
+                                    .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jrbEstado))))
+
                         .addGap(37, 37, 37))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,11 +170,13 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jButton2)))
+
+                        .addComponent(jbIngresar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(157, 157, 157)
-                .addComponent(jButton5)
+                .addComponent(jbSalir)
+
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,61 +185,237 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jrbEstado, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jbIngresar)
+                    .addComponent(jbModificar)
+                    .addComponent(jbEliminar))
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(jbSalir)
+
                 .addGap(5, 5, 5))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jtfNombreActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(this, "Quiere salir del formulario Producto?");
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            try {
+                this.setClosed(true);
+            } catch (PropertyVetoException ex) {
+              
+            }
+        }
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        try{
+            //Extraer los dato que se da en el view
+            int idProducto =Integer.parseInt(jtfNombre.getText());
+             
+            Producto producto = pd.BuscarProducto(idProducto);          
+             
+             if (producto != null) { 
+             jtfNombre.setText(producto.getNombreProd());
+             jtfDescripcion.setText(producto.getDescripcion());
+             jtfCantidad.setText(producto.getStock()+ "");
+             jtfPrecio.setText(producto.getPrecioActual()+ "");
+             jrbEstado.setSelected(producto.isEstado());
+            
+             }else{ 
+                 
+                 JOptionPane.showMessageDialog(null, "No existe ese producto");
+             }
+             
+        }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Error al buscar el producto");
+        }
+        limpiarCampos();
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarActionPerformed
+        try {
+             // Extraer los datos que se ingresan en el view
+            String nom = jtfNombre.getText();
+            String descripcion = jtfDescripcion.getText();
+            String precioText = jtfPrecio.getText();
+            String cantidadText = jtfCantidad.getText();
+
+        // Validar que los campos de cantidad y precio contengan solo números
+        
+        if (!precioText.matches("^\\d+(\\.\\d+)?$")) {
+            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
+            return;
+        }
+        if (!cantidadText.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.");
+            return;
+        }
+
+        int cantidad = Integer.parseInt(cantidadText);
+        double precio = Double.parseDouble(precioText);
+
+        boolean estado = jrbEstado.isSelected();
+
+        if (nom.isEmpty() || descripcion.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+            return;
+        } else {
+            // Crear el objeto producto con las variables como parámetros
+            Producto producto = new Producto(nom, descripcion, precio, cantidad, estado);
+
+            // Pasamos el objeto producto al método que lo guarda en la base de datos
+            pd.RegistrarProducto(producto);
+        }
+
+        limpiarCampos();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error en el formato de los campos numéricos.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
+
+//          try{
+//            Extraer los dato que se da en el view
+//            String nom = jtfNombre.getText();
+//            String descripcion = jtfDescripcion.getText();
+//            int cantidad = Integer.parseInt(jtfCantidad.getText());
+//            double precio = Double.parseDouble(jtfPrecio.getText());
+//            
+//            boolean estado = jrbEstado.isSelected();
+//            
+//            
+//
+//            if(nom.isEmpty() || descripcion.isEmpty()){
+//                
+//                JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+//                return;
+//                
+//            }else{
+//                
+//                Crear el objeto alumno con las variables como parametros
+//                Producto producto = new Producto(nom, descripcion, precio, cantidad, estado);
+//
+//                Pasamos es onjeto alumno al metodo que lo guarde en la db
+//                pd.RegistrarProducto(producto);
+//            }
+//            
+//            limpiarCampos();
+//
+//           
+//        }catch(Exception e){
+//            System.out.println(e);
+//        }
+    }//GEN-LAST:event_jbIngresarActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        
+        int opcion = JOptionPane.showConfirmDialog(this, "Quiere modificar este producto?");
+              
+        if(opcion == JOptionPane.YES_OPTION){
+        
+            try{
+                     String nom = jtfNombre.getText();
+                     String descripcion = jtfDescripcion.getText();
+                     double precio = Double.parseDouble(jtfPrecio.getText());
+                     int cantidad = Integer.parseInt(jtfCantidad.getText());
+                     boolean estado = jrbEstado.isSelected();
+
+
+                     if(nom.isEmpty() || descripcion.isEmpty()) {
+
+                         JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+                         return;
+
+                     } else {
+                         Producto producto= new Producto(nom, descripcion, precio, cantidad, estado);
+                         pd.ModificarProducto(producto);
+                         JOptionPane.showMessageDialog(this, "Producto modificado exitosamente");
+                         limpiarCampos();
+                                                                  
+                     }
+        }catch(NullPointerException e){
+            return;
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error en campos numericos");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
+        boolean estado = jrbEstado.isSelected();
+        
+        if (estado) {
+         jrbEstado.setSelected(true);
+} else {
+        
+        
+        }        
+        
+               
+    }//GEN-LAST:event_jrbEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbIngresar;
+    private javax.swing.JButton jbModificar;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JRadioButton jrbEstado;
+    private javax.swing.JTextField jtfCantidad;
+    private javax.swing.JTextField jtfDescripcion;
+    private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfPrecio;
     // End of variables declaration//GEN-END:variables
+
+
+
+
+
+ private void limpiarCampos(){
+        jtfNombre.setText("");
+        jtfDescripcion.setText("");
+        jtfPrecio.setText("");
+        jtfCantidad.setText("");
+        jrbEstado.setSelected(false);
+ }
+
 }

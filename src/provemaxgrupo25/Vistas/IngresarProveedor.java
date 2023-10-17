@@ -15,7 +15,9 @@ import provemaxgrupo25.Data.ProveedorData;
  * @author HP
  */
 public class IngresarProveedor extends javax.swing.JInternalFrame {
+
     ProveedorData prod;
+
     /**
      * Creates new form ingresarProveedor
      */

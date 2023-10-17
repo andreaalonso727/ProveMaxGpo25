@@ -5,17 +5,34 @@
  */
 package provemaxgrupo25.Vistas;
 
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import provemaxgrupo25.Data.ProductoData;
+import provemaxgrupo25.Entidades.Producto;
+
+
 /**
  *
  * @author HP
  */
 public class ListarProductos extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form listarProductos
-     */
+
+    private DefaultTableModel model;
+    private List<Producto> listaP;
+    private ProductoData pd;
+    
+
     public ListarProductos() {
         initComponents();
+        pd= new ProductoData();
+        model= new DefaultTableModel();
+        listaP= pd.ListarProducto();
+        editartabla();
+        cargarProducto();
+        
+
     }
 
     /**
@@ -28,18 +45,22 @@ public class ListarProductos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+
+        jtListarProd = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jrbActivo = new javax.swing.JRadioButton();
+        jrbBaja = new javax.swing.JRadioButton();
+        jrbTodos = new javax.swing.JRadioButton();
+
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Productos"));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+
+        jtListarProd.setModel(new javax.swing.table.DefaultTableModel(
+
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -50,20 +71,32 @@ public class ListarProductos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+
+        jScrollPane1.setViewportView(jtListarProd);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jRadioButton2.setText("Activos");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jrbActivo.setText("Activos");
+        jrbActivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jrbActivoActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("Baja");
+        jrbBaja.setText("Baja");
+        jrbBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbBajaActionPerformed(evt);
+            }
+        });
 
-        jRadioButton3.setText("Todos");
+        jrbTodos.setText("Todos");
+        jrbTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbTodosActionPerformed(evt);
+            }
+        });
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,20 +105,24 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3))
+
+                    .addComponent(jrbActivo)
+                    .addComponent(jrbBaja)
+                    .addComponent(jrbTodos))
+
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jRadioButton2)
+
+                .addComponent(jrbActivo)
                 .addGap(29, 29, 29)
-                .addComponent(jRadioButton1)
+                .addComponent(jrbBaja)
                 .addGap(40, 40, 40)
-                .addComponent(jRadioButton3)
+                .addComponent(jrbTodos)
+
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -113,17 +150,94 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
+       try{
+            borrarFilaTabla();
+            
+            jrbActivo.setSelected(true);
+            jrbBaja.setSelected(false);
+            jrbTodos.setSelected(false);
+            
+            cargarProducto();
+            
+       }catch(NullPointerException e){
+           return;
+       }
+                                  
+    }//GEN-LAST:event_jrbActivoActionPerformed
+
+    private void jrbBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbBajaActionPerformed
+        try{
+           
+            borrarFilaTabla();
+            jrbBaja.setSelected(true);
+            jrbActivo.setSelected(false);
+            jrbTodos.setSelected(false);
+            
+            cargarProducto();
+            
+       }catch(NullPointerException e){
+           return;
+       }
+    }//GEN-LAST:event_jrbBajaActionPerformed
+
+    private void jrbTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTodosActionPerformed
+         try{
+           
+            borrarFilaTabla();
+            jrbTodos.setSelected(true);
+            jrbActivo.setSelected(false);
+            jrbBaja.setSelected(false);
+            cargarProducto();
+            
+            
+       }catch(NullPointerException e){
+           return;
+       }
+    }//GEN-LAST:event_jrbTodosActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton jrbActivo;
+    private javax.swing.JRadioButton jrbBaja;
+    private javax.swing.JRadioButton jrbTodos;
+    private javax.swing.JTable jtListarProd;
     // End of variables declaration//GEN-END:variables
+private void editartabla(){
+    
+    model.addColumn("ID");
+    model.addColumn("Nombre");
+    model.addColumn("Precio Actual");
+    model.addColumn("Stock");
+    model.addColumn("Estado");
+    jtListarProd.setModel(model); 
 }
+private void cargarProducto() {
+    DefaultTableModel model = (DefaultTableModel) jtListarProd.getModel();
+    model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
+
+    for (Producto item : listaP) {
+        model.addRow(new Object[]{
+            item.getIdProducto(),
+            item.getNombreProd(),
+            item.getStock(),
+            item.getPrecioActual(),
+            item.isEstado()
+        });
+    }
+}
+    
+    private void borrarFilaTabla(){
+        int indice= model.getRowCount() -1;
+        for (int i= indice; i>=0; i--){
+            model.removeRow(i);
+        }
+    }
+}
+
+
