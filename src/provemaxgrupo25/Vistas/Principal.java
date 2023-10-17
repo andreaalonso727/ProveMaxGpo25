@@ -50,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -75,6 +76,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem1);
 
         jMenuItem3.setText("Listar Productos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem3);
 
         jMenuItem4.setText("Listar por Fecha");
@@ -86,6 +92,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem4);
 
         jMenuItem5.setText("Listar entre Fechas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem5);
 
         jMenuBar1.add(jMenu6);
@@ -93,10 +104,28 @@ public class Principal extends javax.swing.JFrame {
         jMenu7.setText("Proveedores");
 
         jMenuItem6.setText("Agregar Proveedor");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem6);
 
         jMenuItem8.setText("Proveedor por Producto");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem8);
+
+        jMenuItem9.setText("ListarProveedor");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem9);
 
         jMenuBar1.add(jMenu7);
 
@@ -145,11 +174,16 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ProductoPorFecha prodxfecha=new ProductoPorFecha();
+        prodxfecha.setVisible(true);
+        jEscritorio.add(prodxfecha);
+        jEscritorio.moveToFront(prodxfecha);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-jEscritorio.removeAll();
+        jEscritorio.removeAll();
         jEscritorio.repaint();
         IngresarCompras iCompra=new IngresarCompras();
         iCompra.setVisible(true);
@@ -158,13 +192,58 @@ jEscritorio.removeAll();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    jEscritorio.removeAll();
+        jEscritorio.removeAll();
         jEscritorio.repaint();
         IngresarProducto iProducto=new IngresarProducto();
         iProducto.setVisible(true);
         jEscritorio.add(iProducto);
         jEscritorio.moveToFront(iProducto);  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ListarProductos lisprod=new ListarProductos();
+        lisprod.setVisible(true);
+        jEscritorio.add(lisprod);
+        jEscritorio.moveToFront(lisprod); 
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ProductoEntreFechas prodEntrefecha=new ProductoEntreFechas();
+        prodEntrefecha.setVisible(true);
+        jEscritorio.add(prodEntrefecha);
+        jEscritorio.moveToFront(prodEntrefecha);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        IngresarProveedor inprovee=new IngresarProveedor();
+        inprovee.setVisible(true);
+        jEscritorio.add(inprovee);
+        jEscritorio.moveToFront(inprovee);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ProvedorPorProducto proveexprod=new ProvedorPorProducto();
+        proveexprod.setVisible(true);
+        jEscritorio.add(proveexprod);
+        jEscritorio.moveToFront(proveexprod);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ListarProveedor listprovee=new ListarProveedor();
+        listprovee.setVisible(true);
+        jEscritorio.add(listprovee);
+        jEscritorio.moveToFront(listprovee);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,5 +302,6 @@ jEscritorio.removeAll();
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
