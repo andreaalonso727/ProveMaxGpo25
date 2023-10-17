@@ -7,6 +7,7 @@ package provemaxgrupo25.Vistas;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.beans.PropertyVetoException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -155,6 +156,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu9);
 
         jMenu10.setText("Salir");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu10);
 
         setJMenuBar(jMenuBar1);
@@ -244,6 +250,16 @@ public class Principal extends javax.swing.JFrame {
         jEscritorio.add(listprovee);
         jEscritorio.moveToFront(listprovee);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+         int opcion = JOptionPane.showConfirmDialog(this, "Desea salir del programa?");
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }else{
+            return;
+        }
+    }//GEN-LAST:event_jMenu10MouseClicked
 
     /**
      * @param args the command line arguments

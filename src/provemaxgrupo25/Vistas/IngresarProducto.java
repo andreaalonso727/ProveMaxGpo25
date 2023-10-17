@@ -238,26 +238,26 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try{
             //Extraer los dato que se da en el view
-            int idProducto =Integer.parseInt(jtfNombre.getText());
+            String nombre =jtfNombre.getText();
              
-            Producto producto = pd.BuscarProducto(idProducto);          
+            Producto producto = pd.buscarProdNombre(nombre);          
              
-             if (producto != null) { 
-             jtfNombre.setText(producto.getNombreProd());
+             //if (producto != null) { 
+             //jtfNombre.setText(producto.getNombreProd());
              jtfDescripcion.setText(producto.getDescripcion());
-             jtfCantidad.setText(producto.getStock()+ "");
              jtfPrecio.setText(producto.getPrecioActual()+ "");
+             jtfCantidad.setText(producto.getStock()+ "");
              jrbEstado.setSelected(producto.isEstado());
             
-             }else{ 
+             //}else{ 
                  
-                 JOptionPane.showMessageDialog(null, "No existe ese producto");
-             }
+                 //JOptionPane.showMessageDialog(null, "No existe ese producto");
+             
              
         }catch(Exception e){
            JOptionPane.showMessageDialog(null, "Error al buscar el producto");
         }
-        limpiarCampos();
+        //limpiarCampos();
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarActionPerformed

@@ -152,9 +152,10 @@ public class ListarProductos extends javax.swing.JInternalFrame {
 
 
     private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
-       try{
-            borrarFilaTabla();
-            
+       
+         borrarFilaTabla();
+        try{
+                      
             jrbActivo.setSelected(true);
             jrbBaja.setSelected(false);
             jrbTodos.setSelected(false);
@@ -214,7 +215,7 @@ private void editartabla(){
     model.addColumn("Nombre");
     model.addColumn("Precio Actual");
     model.addColumn("Stock");
-    model.addColumn("Estado");
+    //model.addColumn("Estado");
     jtListarProd.setModel(model); 
 }
 private void cargarProducto() {
@@ -227,7 +228,7 @@ private void cargarProducto() {
             item.getNombreProd(),
             item.getStock(),
             item.getPrecioActual(),
-            item.isEstado()
+           // item.isEstado()
         });
     }
 }

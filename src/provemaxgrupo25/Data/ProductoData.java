@@ -1,4 +1,4 @@
-
+    
 package provemaxgrupo25.Data;
 
 import java.sql.PreparedStatement;
@@ -212,7 +212,42 @@ public class ProductoData {
         }
         return productos;
     }
-
+public Producto buscarProdNombre (String nombre){
+    
+    Producto producto = null;
+    
+    String sql= "SELECT descripcion,precioActual,stock,estado FROM producto WHERE nombreProducto=?";
+    
+    
+     
+    try {
+        PreparedStatement ps= con.prepareStatement(sql);
+        
+            ps.setString(1,nombre);
+            ResultSet rs= ps.executeQuery();
+            
+            if (rs.next()){
+            
+            producto=new Producto();
+            //producto.setIdProducto(rs.getInt("idProducto"));
+            producto.setDescripcion(rs.getNString("descripcion"));
+            producto.setPrecioActual(rs.getDouble("precioActual"));
+            producto.setStock(rs.getInt("stock"));                                           
+            producto.setEstado(rs.getBoolean("estado"));
+                                               
+            
+            }else {
+                JOptionPane.showMessageDialog(null, "No existe el producto");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto");
+            
+        }
+         return producto;
+               
+    }
     }
        
        
