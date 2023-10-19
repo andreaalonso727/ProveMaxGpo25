@@ -244,16 +244,16 @@ public class ProveedorData {
     
     /*⮚	Mostrar qué proveedores, proveen el producto X. Ej. ¿Quienes me pueden proveer del producto Coca Cola?
 proveedor*/
-public List<Proveedor> obtenerProveedorPorProducto (int idProducto){
+public List<Proveedor> obtenerProveedorPorProducto (String nombreprod){
  
      ArrayList<Proveedor> ProveedoresXProducto= new ArrayList<>();
      String sql= "SELECT p.idProveedor, razonSocial, cuit, domicilio, telefono, estado \n" +
                 "FROM compra com JOIN proveedor p ON com.idProveedor = p.idProveedor \n" +
-                "WHERE idProducto = ? AND p.estado = 1;";
+                "WHERE nombreProducto = ? AND p.estado = 1;";
      
        try {
            PreparedStatement ps = con.prepareStatement(sql);
-           ps.setInt(1, idProducto);
+           ps.setString(1, nombreprod);
            ResultSet rs = ps.executeQuery();
            while (rs.next()){
            

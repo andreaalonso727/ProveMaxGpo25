@@ -91,6 +91,11 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         });
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -146,15 +151,12 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                                     .addComponent(jBBuscar2, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(22, 22, 22))))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jBModificar)
-                        .addGap(50, 50, 50)
-                        .addComponent(jBEliminar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jBSalir)))
+                .addGap(152, 152, 152)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBSalir)
+                    .addComponent(jBModificar))
+                .addGap(50, 50, 50)
+                .addComponent(jBEliminar)
                 .addGap(0, 52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -188,8 +190,9 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                     .addComponent(jBGuardar1)
                     .addComponent(jBModificar)
                     .addComponent(jBEliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jBSalir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jBSalir)
+                .addContainerGap())
         );
 
         pack();
@@ -201,21 +204,21 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         if(opcion == JOptionPane.YES_OPTION){
         
             try{
-                String cuit = jtCuit.getText();
+                int cuit = Integer.parseInt(jtCuit.getText());
                 String razonSocial = jtRazonSocial.getText();
                 String domicilio = jtDomicilio.getText();
                 String telefono = jtTelef.getText();
                 boolean estado = jrEstado.isSelected();
 
 
-                if(razonSocial.isEmpty() || cuit.isEmpty()){
+                if(razonSocial.isEmpty() || jtCuit.getText().isEmpty()){
 
                     JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
                     return;
 
                 }else{
 
-                   Proveedor proveed = new Proveedor(razonSocial, domicilio, telefono, cuit, estado);
+                   Proveedor proveed = new Proveedor(razonSocial,cuit, domicilio, telefono,  estado);
 
                    prove.modificarProveedor(proveed);
                 }
@@ -321,6 +324,10 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
             return;
         }
     }//GEN-LAST:event_jBGuardar1ActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

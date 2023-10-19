@@ -5,7 +5,13 @@
  */
 package provemaxgrupo25.Vistas;
 
+import provemaxgrupo25.Data.ProductoData;
+import provemaxgrupo25.Data.ProveedorData;
 import provemaxgrupo25.Entidades.Producto;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import provemaxgrupo25.Entidades.Proveedor;
 
 /**
  *
@@ -13,11 +19,17 @@ import provemaxgrupo25.Entidades.Producto;
  */
 public class ProvedorPorProducto extends javax.swing.JInternalFrame {
 
+    ProveedorData provdata = new ProveedorData();
+    ProductoData prodata = new ProductoData();
+    private DefaultTableModel modelo= new DefaultTableModel();
+    List<Producto> listam = prodata.ListarProducto();
     /**
      * Creates new form provedorPorProducto
      */
     public ProvedorPorProducto() {
         initComponents();
+        armarCabecera();
+        mostarProducto();
     }
 
     /**
@@ -29,23 +41,29 @@ public class ProvedorPorProducto extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCListaProd = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTProveedXProd = new javax.swing.JTable();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor por Producto"));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
+        jCListaProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCListaProdActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("Seleccione un Producto:");
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTProveedXProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -56,7 +74,7 @@ public class ProvedorPorProducto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTProveedXProd);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,7 +87,7 @@ public class ProvedorPorProducto extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(42, 42, 42)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCListaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -82,7 +100,7 @@ public class ProvedorPorProducto extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCListaProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
@@ -93,12 +111,66 @@ public class ProvedorPorProducto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCListaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCListaProdActionPerformed
+        borrarFilas();
+         if(jCListaProd.getSelectedItem() == "-"){
+             return;
+         }else{
+             
+         int opcion = jCListaProd.getSelectedIndex();
+            //jCListaProd.getSelectedItem().toString());
+           //listam.get(opcion + 1);
+         
+             cargarProveedorXProduc(jCListaProd.getSelectedItem().toString());
+             
+         }
+    }//GEN-LAST:event_jCListaProdActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Producto> jComboBox1;
+    private javax.swing.JComboBox<String> jCListaProd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTProveedXProd;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void armarCabecera(){
+        modelo.addColumn("ID");
+        modelo.addColumn("Razon Social");
+        modelo.addColumn("CUIT");
+        modelo.addColumn("Telefono");
+        jTProveedXProd.setModel(modelo);
+        
+    }
+    
+    private void borrarFilas(){
+            int filas = modelo.getRowCount() - 1;
+        
+            for (int f = filas; f >= 0; f--) {
+                modelo.removeRow(f);
+        }
+    }
+    
+    private void mostarProducto() {
+        
+        for (int i=0;i<listam.size(); i++){
+            jCListaProd.addItem(listam.get(i).getNombreProd());
+    }
+    }
+    
+    private void cargarProveedorXProduc (String nombreprod){
+       
+        List<Proveedor> listaP = provdata.obtenerProveedorPorProducto(nombreprod);
+        modelo = (DefaultTableModel)jTProveedXProd.getModel();
+        
+        for (Proveedor prod : listaP) {
+            if(nombreprod == jCListaProd.getSelectedItem()){
+
+                    modelo.addRow(new Object[]{prod.getIdProveedor(), prod.getRazonSocial(),prod.getCuit(), prod.getTelefono()});
+                }
+        }
+    }
+
 }
