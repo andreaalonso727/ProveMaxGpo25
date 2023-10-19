@@ -142,9 +142,77 @@ public class ProveedorData {
         return proveedor;    
         }
     
+    public Proveedor buscarProveXNomb (String razonSocial){
+            
+
+        String sql="SELECT domicilio,telefono, cuit, estado FROM proveedor WHERE razonSocial =?";
+
+        Proveedor proveedor=null;
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            
+            ps.setString(1,razonSocial);
+            ResultSet rs= ps.executeQuery();
+            if (rs.next()){
+            
+             proveedor=new Proveedor();
+             proveedor.setRazonSocial(razonSocial);
+             proveedor.setDomicilio(rs.getString("domicilio"));
+             proveedor.setTelefono(rs.getString("telefono"));
+             proveedor.setCuit(rs.getInt("cuit"));
+             proveedor.setEstado(rs.getBoolean("estado"));
+                               
+                       
+            }else {
+                JOptionPane.showMessageDialog(null, "No existe el proveedor");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar un proveedor");
+        }
+            
+        return proveedor;    
+        }
+    
+    public Proveedor buscarProveXCuit (int cuit){
+            
+
+        String sql="SELECT razonSocial,domicilio,telefono,estado FROM proveedor WHERE cuit =?";
+
+        Proveedor proveedor=null;
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            
+            ps.setInt(1,cuit);
+            ResultSet rs= ps.executeQuery();
+            if (rs.next()){
+            
+             proveedor=new Proveedor();
+             proveedor.setCuit(cuit);
+             proveedor.setRazonSocial(rs.getNString("razonSocial"));
+             proveedor.setDomicilio(rs.getString("domicilio"));
+             proveedor.setTelefono(rs.getString("telefono"));
+             proveedor.setEstado(rs.getBoolean("estado"));
+                               
+                       
+            }else {
+                JOptionPane.showMessageDialog(null, "No existe el proveedor");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar un proveedor");
+        }
+            
+        return proveedor;    
+        }
+    
     public List<Proveedor> listarProveedor (){
             
-        String sql="SELECT idProveedor, razonSpcial, domicilio, telefono, cuit FROM proveedor WHERE estado=1";
+        String sql="SELECT idProveedor, razonSocial, domicilio, telefono, cuit FROM proveedor WHERE estado=1";
        
         ArrayList<Proveedor> proveedores= new ArrayList<>();
         
@@ -156,7 +224,9 @@ public class ProveedorData {
             
             Proveedor proveedor=new Proveedor();
             proveedor.setIdProveedor(rs.getInt("idProveedor"));
-            proveedor.setRazonSocial(rs.getNString("domicilio"));
+            proveedor.setRazonSocial(rs.getNString("razon social"));
+            proveedor.setDomicilio(rs.getNString("domicilio"));
+            proveedor.setCuit(rs.getInt("cuit"));
             proveedor.setTelefono(rs.getString("telefono"));
             proveedor.setEstado(true);
             
