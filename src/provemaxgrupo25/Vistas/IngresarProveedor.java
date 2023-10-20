@@ -5,6 +5,7 @@
  */
 package provemaxgrupo25.Vistas;
 
+import java.beans.PropertyVetoException;
 import java.sql.Date;
 import javax.swing.JOptionPane;
 import provemaxgrupo25.Entidades.Proveedor;
@@ -16,13 +17,15 @@ import provemaxgrupo25.Data.ProveedorData;
  */
 public class IngresarProveedor extends javax.swing.JInternalFrame {
 
-    ProveedorData prod;
+    ProveedorData prove;
 
     /**
      * Creates new form ingresarProveedor
      */
     public IngresarProveedor() {
         initComponents();
+        
+        prove = new ProveedorData();
     }
 
     /**
@@ -44,11 +47,12 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         jtDomicilio = new javax.swing.JTextField();
         jtTelef = new javax.swing.JTextField();
         jrEstado = new javax.swing.JRadioButton();
-        jBBuscar = new javax.swing.JButton();
+        jBBuscar1 = new javax.swing.JButton();
         jBGuardar1 = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
+        jBBuscar2 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedores"));
         setClosable(true);
@@ -65,14 +69,19 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado:");
 
-        jBBuscar.setText("Buscar");
-        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jBBuscar1.setText("Buscar");
+        jBBuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBBuscarActionPerformed(evt);
+                jBBuscar1ActionPerformed(evt);
             }
         });
 
         jBGuardar1.setText("Guardar");
+        jBGuardar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardar1ActionPerformed(evt);
+            }
+        });
 
         jBModificar.setText("Modificar");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,8 +91,25 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         });
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
+
+        jBBuscar2.setText("Buscar");
+        jBBuscar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscar2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,26 +137,26 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jrEstado)
-                                    .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jtTelef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                                         .addComponent(jtDomicilio, javax.swing.GroupLayout.Alignment.LEADING)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(169, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBBuscar)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jBBuscar1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jBBuscar2, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(22, 22, 22))))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jBModificar)
-                        .addGap(50, 50, 50)
-                        .addComponent(jBEliminar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jBSalir)))
+                .addGap(152, 152, 152)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBSalir)
+                    .addComponent(jBModificar))
+                .addGap(50, 50, 50)
+                .addComponent(jBEliminar)
                 .addGap(0, 52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -140,11 +166,13 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBBuscar))
+                    .addComponent(jBBuscar1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBBuscar2)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -162,22 +190,57 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                     .addComponent(jBGuardar1)
                     .addComponent(jBModificar)
                     .addComponent(jBEliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jBSalir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jBSalir)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(this, "Quiere modificar este proveedor?");
+        
+        if(opcion == JOptionPane.YES_OPTION){
+        
+            try{
+                int cuit = Integer.parseInt(jtCuit.getText());
+                String razonSocial = jtRazonSocial.getText();
+                String domicilio = jtDomicilio.getText();
+                String telefono = jtTelef.getText();
+                boolean estado = jrEstado.isSelected();
+
+
+                if(razonSocial.isEmpty() || jtCuit.getText().isEmpty()){
+
+                    JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+                    return;
+
+                }else{
+
+                   Proveedor proveed = new Proveedor(razonSocial,cuit, domicilio, telefono,  estado);
+
+                   prove.modificarProveedor(proveed);
+                }
+
+                limpiarCampos();
+
+
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Campo Matricula necesario, no debe contener letras, ni caracteres");
+                jtCuit.setText("");
+                return;
+            }
+//        }else{
+//            return;
+        }
     }//GEN-LAST:event_jBModificarActionPerformed
 
-    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+    private void jBBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscar1ActionPerformed
         try{
             
-        int id = Integer.parseInt(jtCuit.getText());
-        Proveedor prov = prod.buscarProveedor(id);
+        int cuit = Integer.parseInt(jtCuit.getText());
+        Proveedor prov = prove.buscarProveXCuit(cuit);
         
         jtRazonSocial.setText(prov.getRazonSocial()+"");
         jtDomicilio.setText(prov.getDomicilio());
@@ -191,11 +254,85 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         }catch(NullPointerException e){            
             return;
         }
-    }//GEN-LAST:event_jBBuscarActionPerformed
+    }//GEN-LAST:event_jBBuscar1ActionPerformed
+
+    private void jBBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscar2ActionPerformed
+        try{
+            
+        String RazonSocial = jtRazonSocial.getText();
+        Proveedor prov = prove.buscarProveXNomb(RazonSocial);
+        
+        jtCuit.setText(prov.getCuit()+"");
+        jtDomicilio.setText(prov.getDomicilio());
+        jtTelef.setText(prov.getTelefono());
+        jrEstado.setSelected(prov.isEstado());
+        
+        
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error al buscar alumno");
+            jtRazonSocial.setText("");
+        }catch(NullPointerException e){            
+            return;
+        }
+    }//GEN-LAST:event_jBBuscar2ActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(this, "Quiere salir del formulario Proveedor?");
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            try {
+                this.setClosed(true);
+            } catch (PropertyVetoException ex) {
+                System.out.println(ex);
+            }
+        }else{
+            return;
+        }
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardar1ActionPerformed
+        try{
+            //Extraer los dato que se da en el view
+            String razonSocial = jtRazonSocial.getText();
+            int cuit = Integer.parseInt(jtCuit.getText());
+            String domicilio = jtDomicilio.getText();
+            String telefono = jtTelef.getText();
+            boolean estado = jrEstado.isSelected();
+            
+
+            if (razonSocial.isEmpty()|| jtCuit.getText().isEmpty()){
+                
+                JOptionPane.showMessageDialog(this, "Debe completar los campos");
+                return;
+                
+            }else{
+                
+                //Crear el objeto alumno con las variables como parametros
+                Proveedor proveedor = new Proveedor(razonSocial,cuit,domicilio,telefono,estado);
+
+                //Pasamos es onjeto alumno al metodo que lo guarde en la db
+                prove.RegistrarProveedor(proveedor);
+            }
+            
+            limpiarCampos();
+
+           
+           
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Campo cuit necesario, no debe contener letras, ni caracteres");
+            jtCuit.getText();
+            return;
+        }
+    }//GEN-LAST:event_jBGuardar1ActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBBuscar;
+    private javax.swing.JButton jBBuscar1;
+    private javax.swing.JButton jBBuscar2;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar1;
     private javax.swing.JButton jBModificar;
@@ -211,4 +348,15 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtRazonSocial;
     private javax.swing.JTextField jtTelef;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos(){
+        jtCuit.setText("");
+        jtRazonSocial.setText("");
+        jtDomicilio.setText("");
+        jtTelef.setText("");
+        jrEstado.setSelected(false);
+        
+    }
+
+
 }
