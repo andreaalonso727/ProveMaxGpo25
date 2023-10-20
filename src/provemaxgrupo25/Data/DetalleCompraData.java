@@ -159,8 +159,7 @@ public DetalleCompra  buscarDetalle (int id){
     
     public List<DetalleCompra> listarProductoPorFecha (LocalDate fecha){
             
-        String sql="SELECT dc.idDetalleCompra, dc.cantidad, dc.precioCosto, dc.idProducto, dc.idCompra, c.fecha AS fechaCompra  + "
-                + "FROM DetalleCompra dc INNER JOIN Compra c ON dc.idCompra = c.idCompra WHERE c.fecha = ? ";
+        String sql="SELECT dc.idDetalle, dc.cantidad, dc.precioCosto, dc.idProducto, dc.idCompra, c.fecha AS fechaCompra FROM DetalleCompra dc INNER JOIN Compra c ON dc.idCompra = c.idCompra WHERE c.fecha = ? ";
         
         ArrayList<DetalleCompra> listarProdXFchaCom= new ArrayList<>();
         
