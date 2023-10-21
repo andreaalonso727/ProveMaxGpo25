@@ -94,8 +94,6 @@ public class ProductoData {
             int exito=ps.executeUpdate();
             if(exito==1){
                 JOptionPane.showMessageDialog(null, "Producto modificado");
-            }else{
-                JOptionPane.showMessageDialog(null, "No se pudo modificar este producto");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar el producto");
@@ -122,11 +120,8 @@ public class ProductoData {
                 producto.setDescripcion(rs.getString("descripcion"));
                 producto.setPrecioActual(rs.getDouble("precioActual"));
                 producto.setStock(rs.getInt("stock"));
-                producto.setEstado(rs.getBoolean("estado"));
+                producto.setEstado(rs.getBoolean("estado"));   
                 
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "No existe ese producto");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -137,7 +132,7 @@ public class ProductoData {
         }
     public List<Producto> ListarProducto(){
         
-        String sql="SELECT idProducto,nombreProducto,descripcion,precioActual,stock FROM producto WHERE estado=1";
+        String sql="SELECT idProducto,nombreProducto,precioActual,stock FROM producto WHERE estado=true";
             
             ArrayList<Producto> productos= new ArrayList<>();
 
@@ -145,26 +140,18 @@ public class ProductoData {
             
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
-            
-            int stockMinimo= 10;
-            
+                                     
             while(rs.next()){
                 Producto producto=new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setNombreProd(rs.getString("nombreProducto"));
-                producto.setDescripcion(rs.getString("descripcion"));
+               
                 producto.setPrecioActual(rs.getDouble("precioActual"));
                 producto.setStock(rs.getInt("stock"));
-                
+                producto.setEstado(true);
                 productos.add(producto);
-                
-                if (producto.getStock()< stockMinimo){
-                
-                System.out.println("Producto por debajo del Stock minimo" + producto.getNombreProd());
-            }
-                
-                }
-                      
+                }             
+                     
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al buscar un producto");
@@ -248,6 +235,124 @@ public Producto buscarProdNombre (String nombre){
          return producto;
                
     }
+public List<Producto> ObtenerProdBaja(){
+        
+        String sql="SELECT idProducto,nombreProducto,precioActual,stock FROM producto WHERE estado=false";
+            
+            ArrayList<Producto> productos= new ArrayList<>();
+
+        try {
+            
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+                                    
+            while(rs.next()){
+                Producto producto=new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombreProd(rs.getString("nombreProducto"));
+                
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                
+                productos.add(producto);
+                
+                }            
+                    
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar un producto");
+            
+        }
+        return productos;
+    }
+public List<Producto> ObtenerTodosProd(){
+        
+        String sql="SELECT idProducto,nombreProducto,precioActual,stock, estado FROM producto ";
+            
+            ArrayList<Producto> productos= new ArrayList<>();
+
+        try {
+            
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            
+            int stockMinimo= 10;
+            while(rs.next()){
+                Producto producto=new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombreProd(rs.getString("nombreProducto"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                productos.add(producto);
+                if (producto.getStock()< stockMinimo){
+                
+                 JOptionPane.showMessageDialog(null, "Producto por debajo del Stock minimo  " + producto.getNombreProd());
+                }
+                }   
+             
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar un producto");
+            
+        }
+        return productos;
+    }
+ public void EliminarProd(int id) {
+        
+        String sql= "DELETE FROM producto WHERE idProducto = ?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            int exito=ps.executeUpdate();
+            if (exito==1){
+                JOptionPane.showMessageDialog(null, "Producto Eliminado");
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "No se elimino");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al eliminar un producto");
+        }
+    
+ 
+    }
+  public void CambiarEstadoProducto(int idProducto) {
+    String sql = "UPDATE producto SET estado = false WHERE idProducto = ?";
+    PreparedStatement ps;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, idProducto); // Establecer el ID del producto que deseas cambiar
+
+        int exito = ps.executeUpdate();
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Estado del producto cambiado a 'false'");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo cambiar el estado del producto");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado del producto");
+    }
+}
+  public void CambiarEstadoProdT(int idProducto) {
+    String sql = "UPDATE producto SET estado = true WHERE idProducto = ?";
+    PreparedStatement ps;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, idProducto); // Establecer el ID del producto que deseas cambiar
+
+        int exito = ps.executeUpdate();
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Estado del producto cambiado a 'true'");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo cambiar el estado del producto");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado del producto");
+    }
+}
     }
        
        

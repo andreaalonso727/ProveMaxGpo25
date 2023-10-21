@@ -7,6 +7,7 @@ package provemaxgrupo25.Vistas;
 
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import provemaxgrupo25.Data.ProductoData;
 import provemaxgrupo25.Entidades.Producto;
@@ -21,6 +22,8 @@ public class ListarProductos extends javax.swing.JInternalFrame {
 
     private DefaultTableModel model;
     private List<Producto> listaP;
+    private List<Producto> listaPB;
+    private List<Producto> listaTP;
     private ProductoData pd;
     
 
@@ -29,8 +32,10 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         pd= new ProductoData();
         model= new DefaultTableModel();
         listaP= pd.ListarProducto();
+        listaPB= pd.ObtenerProdBaja();
+        listaTP= pd.ObtenerTodosProd();
         editartabla();
-        cargarProducto();
+        
         
 
     }
@@ -45,22 +50,20 @@ public class ListarProductos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-
         jtListarProd = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jrbActivo = new javax.swing.JRadioButton();
         jrbBaja = new javax.swing.JRadioButton();
         jrbTodos = new javax.swing.JRadioButton();
-
+        jbAlta = new javax.swing.JButton();
+        jbAnular = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Productos"));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
-
         jtListarProd.setModel(new javax.swing.table.DefaultTableModel(
-
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -71,7 +74,6 @@ public class ListarProductos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-
         jScrollPane1.setViewportView(jtListarProd);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -97,7 +99,6 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             }
         });
 
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -105,26 +106,36 @@ public class ListarProductos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-
                     .addComponent(jrbActivo)
                     .addComponent(jrbBaja)
                     .addComponent(jrbTodos))
-
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-
                 .addComponent(jrbActivo)
                 .addGap(29, 29, 29)
                 .addComponent(jrbBaja)
                 .addGap(40, 40, 40)
                 .addComponent(jrbTodos)
-
                 .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        jbAlta.setText("Alta producto");
+        jbAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaActionPerformed(evt);
+            }
+        });
+
+        jbAnular.setText("AnularProducto");
+        jbAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,16 +146,26 @@ public class ListarProductos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jbAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbAlta)
+                    .addComponent(jbAnular))
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -153,57 +174,97 @@ public class ListarProductos extends javax.swing.JInternalFrame {
 
     private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
        
-         borrarFilaTabla();
         try{
-                      
+             
+             
             jrbActivo.setSelected(true);
             jrbBaja.setSelected(false);
             jrbTodos.setSelected(false);
             
-            cargarProducto();
+            cargarProdActivo();
+            
+            jbAnular.setEnabled(true);
+            jbAlta.setEnabled(false);
+           
             
        }catch(NullPointerException e){
            return;
+             
        }
                                   
     }//GEN-LAST:event_jrbActivoActionPerformed
 
     private void jrbBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbBajaActionPerformed
-        try{
+       try{
            
-            borrarFilaTabla();
             jrbBaja.setSelected(true);
-            jrbActivo.setSelected(false);
             jrbTodos.setSelected(false);
+            jrbActivo.setSelected(false);
             
-            cargarProducto();
+            cargarProdBaja();
+            
+            jbAnular.setEnabled(false);
+            jbAlta.setEnabled(true);
             
        }catch(NullPointerException e){
            return;
+             
        }
     }//GEN-LAST:event_jrbBajaActionPerformed
 
     private void jrbTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTodosActionPerformed
          try{
            
-            borrarFilaTabla();
+           
             jrbTodos.setSelected(true);
             jrbActivo.setSelected(false);
             jrbBaja.setSelected(false);
+            
             cargarProducto();
             
+            
+            jbAnular.setEnabled(false);
+            jbAlta.setEnabled(false);
             
        }catch(NullPointerException e){
            return;
        }
     }//GEN-LAST:event_jrbTodosActionPerformed
 
+    private void jbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaActionPerformed
+         int filasSelec = jtListarProd.getSelectedRow();
+        if(filasSelec !=-1){
+           
+           int idProducto = (Integer) model.getValueAt(filasSelec, 0); 
+           pd.CambiarEstadoProdT(idProducto);
+                      
+           
+            borrarFilaTabla();
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "Usted debe seleccionar una fila de la tabla");
+        }
+    }//GEN-LAST:event_jbAltaActionPerformed
+
+    private void jbAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularActionPerformed
+      
+        int filaSeleccionada = jtListarProd.getSelectedRow();
+    if (filaSeleccionada != -1) {
+        int idProducto = (Integer) model.getValueAt(filaSeleccionada, 0);
+        pd.CambiarEstadoProducto(idProducto);// Suponiendo que pd es una instancia válida de la clase que contiene el método EliminarProducto
+        borrarFilaTabla(); // Suponiendo que tienes una función para borrar la fila en la posición especificada
+    } else {
+        JOptionPane.showMessageDialog(this, "Usted debe seleccionar una fila de la tabla");
+    }
+    }//GEN-LAST:event_jbAnularActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAlta;
+    private javax.swing.JButton jbAnular;
     private javax.swing.JRadioButton jrbActivo;
     private javax.swing.JRadioButton jrbBaja;
     private javax.swing.JRadioButton jrbTodos;
@@ -215,20 +276,21 @@ private void editartabla(){
     model.addColumn("Nombre");
     model.addColumn("Precio Actual");
     model.addColumn("Stock");
-    //model.addColumn("Estado");
+    model.addColumn("Estado");
     jtListarProd.setModel(model); 
 }
 private void cargarProducto() {
+    listaTP= pd.ObtenerTodosProd();
     DefaultTableModel model = (DefaultTableModel) jtListarProd.getModel();
     model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
 
-    for (Producto item : listaP) {
+    for (Producto item : listaTP) {
         model.addRow(new Object[]{
             item.getIdProducto(),
             item.getNombreProd(),
-            item.getStock(),
             item.getPrecioActual(),
-           // item.isEstado()
+            item.getStock(),
+            item.isEstado()
         });
     }
 }
@@ -239,6 +301,45 @@ private void cargarProducto() {
             model.removeRow(i);
         }
     }
+    private void cargarProdActivo() {
+    listaP = pd.ListarProducto(); // Supongo que este método devuelve una lista de productos con su estado
+
+    DefaultTableModel model = (DefaultTableModel) jtListarProd.getModel(); // Supongo que 'model' se refiere al modelo de tu tabla
+
+    // Limpia la tabla antes de agregar nuevos datos
+    model.setRowCount(0);
+
+    for (Producto p : listaP) {
+        if (p.isEstado()== true) { // Verifica si el estado del producto es activo
+            model.addRow(new Object[] { p.getIdProducto(), p.getNombreProd(), p.getPrecioActual(), p.getStock(), p.isEstado() });
+        }
+    }
+    }
+   private void cargarProdBaja() {
+    listaPB = pd.ObtenerProdBaja(); // Supongo que este método devuelve una lista de productos con estado inactivo (false)
+
+    DefaultTableModel model = (DefaultTableModel) jtListarProd.getModel(); // Supongo que 'model' se refiere al modelo de tu tabla
+
+    // Limpia la tabla antes de agregar nuevos datos
+    model.setRowCount(0);
+
+    for (Producto p : listaPB) {
+        if (!p.isEstado()) { // Verifica si el estado del producto es inactivo (false)
+            model.addRow(new Object[] { p.getIdProducto(), p.getNombreProd(), p.getPrecioActual(), p.getStock(), p.isEstado() });
+        }
+    }
 }
+
+
+
+
+
+
+
+
+}
+    
+    
+
 
 

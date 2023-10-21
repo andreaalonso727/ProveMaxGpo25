@@ -50,7 +50,6 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-
         jtfNombre = new javax.swing.JTextField();
         jtfDescripcion = new javax.swing.JTextField();
         jtfCantidad = new javax.swing.JTextField();
@@ -59,11 +58,8 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
         jbBuscar = new javax.swing.JButton();
         jbIngresar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-
-        
-
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar Producto"));
         setClosable(true);
@@ -79,7 +75,6 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
         jLabel4.setText("Precio");
 
         jLabel5.setText("Estado");
-
 
         jtfNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,14 +109,17 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
             }
         });
 
-        jbEliminar.setText("Eliminar");
+        jbLimpiar.setText("limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
-
-         
             }
         });
 
@@ -139,11 +137,9 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(111, 111, 111)
-
                                 .addComponent(jbModificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbEliminar))
-
+                                .addComponent(jbLimpiar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -151,7 +147,6 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-
                                         .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(26, 26, 26)
                                         .addComponent(jbBuscar))
@@ -159,7 +154,6 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                                     .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jrbEstado))))
-
                         .addGap(37, 37, 37))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,13 +164,11 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-
                         .addComponent(jbIngresar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(157, 157, 157)
                 .addComponent(jbSalir)
-
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,7 +177,6 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-
                     .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
@@ -208,10 +199,9 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbIngresar)
                     .addComponent(jbModificar)
-                    .addComponent(jbEliminar))
+                    .addComponent(jbLimpiar))
                 .addGap(18, 18, 18)
                 .addComponent(jbSalir)
-
                 .addGap(5, 5, 5))
         );
 
@@ -358,7 +348,7 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                      } else {
                          Producto producto= new Producto(nom, descripcion, precio, cantidad, estado);
                          pd.ModificarProducto(producto);
-                         JOptionPane.showMessageDialog(this, "Producto modificado exitosamente");
+                        
                          limpiarCampos();
                                                                   
                      }
@@ -385,18 +375,20 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                
     }//GEN-LAST:event_jrbEstadoActionPerformed
 
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+       limpiarCampos();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbIngresar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrbEstado;
