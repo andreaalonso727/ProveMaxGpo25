@@ -52,16 +52,16 @@ public class ProveedorData {
     
      public void modificarProveedor (Proveedor proveedor){
        
-        String sql= "UPDATE proveedor SET razonSocial=?, domicilio=?, telefono=?, cuit=?, estado=?  WHERE idProveedor=?";
+        String sql= "UPDATE proveedor SET  cuit=?,domicilio=?, telefono=?,  estado=?  WHERE razonSocial=?";
+        
         try {
             PreparedStatement ps= con.prepareStatement(sql);
-            
-            ps.setString(1, proveedor.getRazonSocial());
+           
+            ps.setInt(1, proveedor.getCuit());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3,proveedor.getTelefono());
-            ps.setInt(4, proveedor.getCuit());
-            ps.setBoolean(5, true);
-            ps.setInt(6,proveedor.getIdProveedor());
+            ps.setBoolean(4, proveedor.isEstado());
+            ps.setString(5,proveedor.getRazonSocial());
             
             int exito= ps.executeUpdate();
             if(exito==1){
@@ -124,9 +124,9 @@ public class ProveedorData {
              proveedor=new Proveedor();
              proveedor.setIdProveedor(id);
              proveedor.setRazonSocial(rs.getNString("razonSocial"));
+             proveedor.setCuit(rs.getInt("cuit"));
              proveedor.setDomicilio(rs.getString("domicilio"));
              proveedor.setTelefono(rs.getString("telefono"));
-             proveedor.setCuit(rs.getInt("cuit"));
              proveedor.setEstado(rs.getBoolean("estado"));
                                
                        
@@ -136,11 +136,71 @@ public class ProveedorData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al buscar un proveedor");
+            JOptionPane.showMessageDialog(null,"Error al buscar los proveedores");
         }
             
         return proveedor;    
         }
+    
+    public List<Proveedor> ProveedBaja(){
+        
+        String sql="SELECT idProveedor,razonSocial,cuit,domicilio,telefono FROM proveedor WHERE estado=false";
+            
+            ArrayList<Proveedor> proveedores= new ArrayList<>();
+
+        try {
+            
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+                                    
+            while(rs.next()){
+                Proveedor proveedor=new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setCuit(rs.getInt("cuit"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(false);
+                proveedores.add(proveedor);
+                
+                }            
+                    
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar los proveedores baja");
+            
+        }
+        return proveedores;
+    }
+public List<Proveedor> TodosProveed(){
+        
+        String sql="SELECT idProveedor,razonSocial,cuit,domicilio, telefono, estado FROM proveedor ";
+            
+            ArrayList<Proveedor> proveedores= new ArrayList<>();
+
+        try {
+            
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                Proveedor proveedor=new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setCuit(rs.getInt("cuit"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
+                proveedores.add(proveedor);
+                }   
+             
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar todos los proveedores");
+            
+        }
+        return proveedores;
+    }
     
     public Proveedor buscarProveXNomb (String razonSocial){
             
@@ -212,7 +272,7 @@ public class ProveedorData {
     
     public List<Proveedor> listarProveedor (){
             
-        String sql="SELECT idProveedor, razonSocial, domicilio, telefono, cuit FROM proveedor WHERE estado=1";
+        String sql="SELECT idProveedor, razonSocial, domicilio, telefono, cuit FROM proveedor WHERE estado=true";
        
         ArrayList<Proveedor> proveedores= new ArrayList<>();
         
@@ -224,7 +284,7 @@ public class ProveedorData {
             
             Proveedor proveedor=new Proveedor();
             proveedor.setIdProveedor(rs.getInt("idProveedor"));
-            proveedor.setRazonSocial(rs.getString("razon social"));
+            proveedor.setRazonSocial(rs.getString("razonSocial"));
             proveedor.setDomicilio(rs.getString("domicilio"));
             proveedor.setCuit(rs.getInt("cuit"));
             proveedor.setTelefono(rs.getString("telefono"));
@@ -234,9 +294,9 @@ public class ProveedorData {
             
             }
             ps.close();
-            //System.out.println(proveedores);
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al listar proveedores");
+            JOptionPane.showMessageDialog(null,"Error al listar proveedores activos");
         }
             
         return proveedores;    
@@ -252,7 +312,7 @@ public List<Proveedor> obtenerProveedorPorProducto (String nombreprod){
                   "JOIN proveedor p ON com.idProveedor = p.idProveedor \n" +
                   "JOIN detallecompra d ON d.idCompra = com.idCompra \n" +
                   "JOIN producto pro ON pro.idProducto = d.idProducto \n" +
-                  "WHERE pro.nombreProducto =? AND p.estado = 1"; 
+                  "WHERE pro.nombreProducto =?"; 
      
        try {
            PreparedStatement ps = con.prepareStatement(sql);

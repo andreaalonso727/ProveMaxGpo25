@@ -18,7 +18,9 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
 
     private DefaultTableModel model;
     private ProveedorData provData;
-    private List<Proveedor> listp;
+    private List<Proveedor> listpactiv;
+    private List<Proveedor> listpbaja;
+    private List<Proveedor> listttodosp;
     
     /**
      * Creates new form listarProveedor
@@ -27,10 +29,12 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
         initComponents();
         
         provData = new ProveedorData();
-        listp = provData.listarProveedor();
+        listpactiv = provData.listarProveedor();
+        listpbaja = provData.ProveedBaja();
+        listttodosp = provData.TodosProveed();
         model= new DefaultTableModel();
         editartabla();
-        cargarProveedor();
+        
         
     }
 
@@ -137,13 +141,12 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
     private void jRBActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivoActionPerformed
         try{
             
-            //Proveedor selec = (Proveedor) jRBActivo.setSelected();
-            borrarFilaTabla();
+           
             jRBActivo.setSelected(true);
             jRBbaja.setSelected(false);
             jRBTodos.setSelected(false);
             
-            cargarProveedor();
+            ProvActivo();
             
         }catch(NullPointerException e){
             return;
@@ -153,12 +156,11 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
     private void jRBbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBbajaActionPerformed
         try{
            
-            borrarFilaTabla();
             jRBbaja.setSelected(true);
             jRBActivo.setSelected(false);
             jRBTodos.setSelected(false);
             
-            cargarProveedor();
+            ProvBaja();
             
        }catch(NullPointerException e){
            return;
@@ -168,7 +170,6 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
     private void jRBTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTodosActionPerformed
         try{
            
-            borrarFilaTabla();
             jRBTodos.setSelected(true);
             jRBActivo.setSelected(false);
             jRBbaja.setSelected(false);
@@ -210,10 +211,11 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
     }
 
     private void cargarProveedor() {
+    listttodosp= provData.TodosProveed();
     DefaultTableModel model = (DefaultTableModel) jTlistProv.getModel();
     model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
 
-    for (Proveedor item : listp) {
+    for (Proveedor item : listttodosp) {
         model.addRow(new Object[]{
             item.getIdProveedor(),
             item.getRazonSocial(),
@@ -222,6 +224,35 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
             item.getTelefono(),
            // item.isEstado()
         });
+    }
+}
+    
+    private void ProvActivo() {
+    listpactiv = provData.listarProveedor(); // método devuelve una lista de proveedores con su estado
+
+    DefaultTableModel model = (DefaultTableModel) jTlistProv.getModel(); 
+
+    // Limpia la tabla antes de agregar nuevos datos
+    model.setRowCount(0);
+
+    for (Proveedor p : listpactiv) {
+        if (p.isEstado()== true) { // Verifica el estado del proveedor activo
+            model.addRow(new Object[] { p.getIdProveedor(), p.getRazonSocial(), p.getCuit(), p.getDomicilio(), p.getTelefono() });
+        }
+    }
+    }
+   private void ProvBaja() {
+    listpbaja = provData.ProveedBaja(); // método que devuelve una lista de productos con estado inactivo (false)
+
+    DefaultTableModel model = (DefaultTableModel) jTlistProv.getModel(); 
+
+    // Limpia la tabla antes de agregar nuevos datos
+    model.setRowCount(0);
+
+    for (Proveedor p : listpbaja) {
+        if (!p.isEstado()) { // Verifica si el estado del proveedor es inactivo (false)
+            model.addRow(new Object[] { p.getIdProveedor(), p.getRazonSocial(), p.getCuit(), p.getDomicilio(), p.getTelefono() });
+        }
     }
 }
 }
