@@ -29,7 +29,7 @@ public class ProveedorData {
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
             ps.setInt(4, proveedor.getCuit());
-            ps.setBoolean(5, true);
+            ps.setBoolean(5, proveedor.isEstado());
             
             ps.executeUpdate();
             
@@ -224,8 +224,8 @@ public class ProveedorData {
             
             Proveedor proveedor=new Proveedor();
             proveedor.setIdProveedor(rs.getInt("idProveedor"));
-            proveedor.setRazonSocial(rs.getNString("razon social"));
-            proveedor.setDomicilio(rs.getNString("domicilio"));
+            proveedor.setRazonSocial(rs.getString("razon social"));
+            proveedor.setDomicilio(rs.getString("domicilio"));
             proveedor.setCuit(rs.getInt("cuit"));
             proveedor.setTelefono(rs.getString("telefono"));
             proveedor.setEstado(true);
@@ -234,9 +234,9 @@ public class ProveedorData {
             
             }
             ps.close();
-            
+            //System.out.println(proveedores);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al buscar un proveedor");
+            JOptionPane.showMessageDialog(null,"Error al listar proveedores");
         }
             
         return proveedores;    
@@ -247,9 +247,12 @@ proveedor*/
 public List<Proveedor> obtenerProveedorPorProducto (String nombreprod){
  
      ArrayList<Proveedor> ProveedoresXProducto= new ArrayList<>();
-     String sql= "SELECT p.idProveedor, razonSocial, cuit, domicilio, telefono, estado \n" +
-                "FROM compra com JOIN proveedor p ON com.idProveedor = p.idProveedor \n" +
-                "WHERE nombreProducto = ? AND p.estado = 1;";
+     String sql= "SELECT p.idProveedor, p.razonSocial, p.cuit, p.domicilio, p.telefono, p.estado \n" + 
+                  "FROM compra com \n" +
+                  "JOIN proveedor p ON com.idProveedor = p.idProveedor \n" +
+                  "JOIN detallecompra d ON d.idCompra = com.idCompra \n" +
+                  "JOIN producto pro ON pro.idProducto = d.idProducto \n" +
+                  "WHERE pro.nombreProducto =? AND p.estado = 1"; 
      
        try {
            PreparedStatement ps = con.prepareStatement(sql);

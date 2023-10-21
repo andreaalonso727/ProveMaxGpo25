@@ -36,7 +36,7 @@ public class ProductoData {
             ps.setString(2, producto.getDescripcion());
             ps.setDouble(3, producto.getPrecioActual());
             ps.setInt(4, producto.getStock());
-            ps.setBoolean(5, true);
+            ps.setBoolean(5, producto.isEstado());
             ps.executeUpdate();
             
             ResultSet rs=ps.getGeneratedKeys();

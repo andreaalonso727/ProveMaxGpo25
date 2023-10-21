@@ -5,17 +5,33 @@
  */
 package provemaxgrupo25.Vistas;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import provemaxgrupo25.Data.ProveedorData;
+import provemaxgrupo25.Entidades.Proveedor;
+
 /**
  *
  * @author HP
  */
 public class ListarProveedor extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel model;
+    private ProveedorData provData;
+    private List<Proveedor> listp;
+    
     /**
      * Creates new form listarProveedor
      */
     public ListarProveedor() {
         initComponents();
+        
+        provData = new ProveedorData();
+        listp = provData.listarProveedor();
+        model= new DefaultTableModel();
+        editartabla();
+        cargarProveedor();
+        
     }
 
     /**
@@ -28,13 +44,13 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTlistProv = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRBActivo = new javax.swing.JRadioButton();
+        jRBTodos = new javax.swing.JRadioButton();
+        jRBbaja = new javax.swing.JRadioButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTlistProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -45,20 +61,30 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTlistProv);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jRadioButton1.setText("Activo");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jRBActivo.setText("Activo");
+        jRBActivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jRBActivoActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Todos");
+        jRBTodos.setText("Todos");
+        jRBTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTodosActionPerformed(evt);
+            }
+        });
 
-        jRadioButton3.setText("Baja");
+        jRBbaja.setText("Baja");
+        jRBbaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBbajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,20 +93,20 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jRBbaja)
+                    .addComponent(jRBTodos)
+                    .addComponent(jRBActivo))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jRadioButton1)
+                .addComponent(jRBActivo)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton3)
+                .addComponent(jRBbaja)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton2)
+                .addComponent(jRBTodos)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -108,17 +134,94 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void jRBActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivoActionPerformed
+        try{
+            
+            //Proveedor selec = (Proveedor) jRBActivo.setSelected();
+            borrarFilaTabla();
+            jRBActivo.setSelected(true);
+            jRBbaja.setSelected(false);
+            jRBTodos.setSelected(false);
+            
+            cargarProveedor();
+            
+        }catch(NullPointerException e){
+            return;
+        }
+    }//GEN-LAST:event_jRBActivoActionPerformed
+
+    private void jRBbajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBbajaActionPerformed
+        try{
+           
+            borrarFilaTabla();
+            jRBbaja.setSelected(true);
+            jRBActivo.setSelected(false);
+            jRBTodos.setSelected(false);
+            
+            cargarProveedor();
+            
+       }catch(NullPointerException e){
+           return;
+       }
+    }//GEN-LAST:event_jRBbajaActionPerformed
+
+    private void jRBTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTodosActionPerformed
+        try{
+           
+            borrarFilaTabla();
+            jRBTodos.setSelected(true);
+            jRBActivo.setSelected(false);
+            jRBbaja.setSelected(false);
+            
+            cargarProveedor();
+            
+       }catch(NullPointerException e){
+           return;
+       }
+    }//GEN-LAST:event_jRBTodosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRBActivo;
+    private javax.swing.JRadioButton jRBTodos;
+    private javax.swing.JRadioButton jRBbaja;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTlistProv;
     // End of variables declaration//GEN-END:variables
+
+
+    private void editartabla(){
+    
+    model.addColumn("ID");
+    model.addColumn("Razon Social");
+    model.addColumn("Cuit");
+    model.addColumn("Domicilio");
+    model.addColumn("Telefono");
+    model.addColumn("Estado");
+    jTlistProv.setModel(model); 
+    }
+
+    private void borrarFilaTabla(){
+        int indice= model.getRowCount() -1;
+        for (int i= indice; i>=0; i--){
+            model.removeRow(i);
+        }
+    }
+
+    private void cargarProveedor() {
+    DefaultTableModel model = (DefaultTableModel) jTlistProv.getModel();
+    model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
+
+    for (Proveedor item : listp) {
+        model.addRow(new Object[]{
+            item.getIdProveedor(),
+            item.getRazonSocial(),
+            item.getCuit(),
+            item.getDomicilio(),
+            item.getTelefono(),
+           // item.isEstado()
+        });
+    }
+}
 }
