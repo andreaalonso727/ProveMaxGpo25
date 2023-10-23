@@ -307,13 +307,14 @@ proveedor*/
 public List<Proveedor> obtenerProveedorPorProducto (String nombreprod){
  
      ArrayList<Proveedor> ProveedoresXProducto= new ArrayList<>();
+
      String sql= "SELECT p.idProveedor, p.razonSocial, p.cuit, p.domicilio, p.telefono, p.estado \n" + 
                   "FROM compra com \n" +
                   "JOIN proveedor p ON com.idProveedor = p.idProveedor \n" +
                   "JOIN detallecompra d ON d.idCompra = com.idCompra \n" +
                   "JOIN producto pro ON pro.idProducto = d.idProducto \n" +
                   "WHERE pro.nombreProducto =?"; 
-     
+
        try {
            PreparedStatement ps = con.prepareStatement(sql);
            ps.setString(1, nombreprod);

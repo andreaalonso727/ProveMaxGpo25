@@ -163,11 +163,11 @@ public class ProductoData {
 /*Aquellos productos que sean los más comprados entre fechas. Ej. ¿Qué productos he comprado más entre f1 y f2?*/
 
     public List<Producto> ProdEntrefechas(LocalDate f1, LocalDate f2){
-        String sql= "SELECT p.nombreProducto, p.stock, p.estado \n" +
+        String sql= "SELECT p.nombreProducto, p.stock\n" +
                     "FROM detallecompra dc \n" +
                     "JOIN producto p ON dc.idProducto = p.idProducto\n" +
                     "JOIN compra c ON dc.idCompra = c.idCompra\n" +
-                    "WHERE c.fecha BETWEEN ? AND ? AND estado = 1;";
+                    "WHERE c.fecha BETWEEN ? AND ? ";
         
         ArrayList<Producto> productos= new ArrayList<>();
         

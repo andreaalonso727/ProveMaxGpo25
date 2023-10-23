@@ -1,21 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package provemaxgrupo25.Vistas;
 
-/**
- *
- * @author HP
- */
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import provemaxgrupo25.Data.CompraData;
+import provemaxgrupo25.Data.DetalleCompraData;
+import provemaxgrupo25.Data.ProductoData;
+import provemaxgrupo25.Entidades.DetalleCompra;
+
+
 public class ProductoEntreFechas extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form productoEntreFechas
-     */
+     private DefaultTableModel model;
+     private ProductoData pd;
+     private DetalleCompraData dcd;
+     private CompraData cd;
+     private List<DetalleCompra> listaDC;
+     
     public ProductoEntreFechas() {
         initComponents();
+         model= new DefaultTableModel();
+        pd= new ProductoData();
+        dcd= new DetalleCompraData();
+        LocalDate fecha = LocalDate.now();
+        listaDC= dcd.listarProductoPorFecha(fecha);
+        jdchFecha1.addPropertyChangeListener(evt -> jdchFecha1PropertyChange(evt));
+        jdchFecha2.addPropertyChangeListener(evt -> jdchFecha2PropertyChange(evt));
+        editartabla();
+        cargarProducto();
     }
 
     /**
@@ -28,10 +43,10 @@ public class ProductoEntreFechas extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jdchFecha1 = new com.toedter.calendar.JDateChooser();
+        jdchFecha2 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtEntreFechas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
@@ -43,7 +58,19 @@ public class ProductoEntreFechas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("Seleccione Fechas:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jdchFecha1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdchFecha1PropertyChange(evt);
+            }
+        });
+
+        jdchFecha2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdchFecha2PropertyChange(evt);
+            }
+        });
+
+        jtEntreFechas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -54,7 +81,7 @@ public class ProductoEntreFechas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtEntreFechas);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("y");
@@ -71,11 +98,11 @@ public class ProductoEntreFechas extends javax.swing.JInternalFrame {
                         .addGap(24, 24, 24)
                         .addComponent(jLabel1)
                         .addGap(41, 41, 41)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jdchFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jdchFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -89,9 +116,9 @@ public class ProductoEntreFechas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdchFecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdchFecha2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(16, 16, 16)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,14 +130,76 @@ public class ProductoEntreFechas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jdchFecha1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdchFecha1PropertyChange
+         try{
+        if ("date".equals(evt.getPropertyName())) {
+        // Asegurarse de que el evento sea causado por un cambio de fecha
+
+        // Obtener la fecha seleccionada del jdchFecha
+        LocalDate fechaSeleccionada = jdchFecha1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        // Llamar al método para cargar productos por fecha
+        listaDC= dcd.listarProductoPorFecha(fechaSeleccionada);
+        cargarProducto();
+        
+    }        
+       }catch(NullPointerException e){
+           JOptionPane.showMessageDialog(null,"Error al cargar");
+           } 
+       
+    }//GEN-LAST:event_jdchFecha1PropertyChange
+
+    private void jdchFecha2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdchFecha2PropertyChange
+         try{
+        if ("date".equals(evt.getPropertyName())) {
+        // Asegurarse de que el evento sea causado por un cambio de fecha
+
+        // Obtener la fecha seleccionada del jdchFecha
+        LocalDate fechaSeleccionada = jdchFecha2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        // Llamar al método para cargar productos por fecha
+        listaDC= dcd.listarProductoPorFecha(fechaSeleccionada);
+        cargarProducto();
+        
+    }        
+       }catch(NullPointerException e){
+           JOptionPane.showMessageDialog(null,"Error al cargar");
+           } 
+       
+    }//GEN-LAST:event_jdchFecha2PropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private com.toedter.calendar.JDateChooser jdchFecha1;
+    private com.toedter.calendar.JDateChooser jdchFecha2;
+    private javax.swing.JTable jtEntreFechas;
     // End of variables declaration//GEN-END:variables
+
+private void editartabla(){
+    
+    model.addColumn("IdDetalleCompra");
+    model.addColumn("Nombre Producto");    
+    model.addColumn("Fecha Compra1");
+    model.addColumn("Fecha Compra2");
+    jtEntreFechas.setModel(model); 
+}
+
+private void cargarProducto() {
+    
+    DefaultTableModel model = (DefaultTableModel) jtEntreFechas.getModel();
+    model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
+
+    for (DetalleCompra item : listaDC) {
+        model.addRow(new Object[]{
+            item.getIdDetalle(),
+            item.getProducto().getNombreProd(),
+            item.getCompra().getFecha(),
+            item.getCompra().getFecha(),
+        });
+    }
+}
 }

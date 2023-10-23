@@ -2,7 +2,9 @@
 package provemaxgrupo25.Vistas;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import provemaxgrupo25.Data.CompraData;
 import provemaxgrupo25.Data.DetalleCompraData;
@@ -25,7 +27,7 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
         dcd= new DetalleCompraData();
         LocalDate fecha = LocalDate.now();
         listaDC= dcd.listarProductoPorFecha(fecha);
-        
+        jdchFecha.addPropertyChangeListener(evt -> jdchFechaPropertyChange(evt));
         editartabla();
         cargarProducto();
         
@@ -50,6 +52,19 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+
+        jdchFecha.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jdchFechaInputMethodTextChanged(evt);
+            }
+        });
+        jdchFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdchFechaPropertyChange(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("Seleccione una Fecha:");
@@ -105,6 +120,29 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jdchFechaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdchFechaInputMethodTextChanged
+       System.out.print("error");
+    }//GEN-LAST:event_jdchFechaInputMethodTextChanged
+
+    private void jdchFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdchFechaPropertyChange
+       try{
+        if ("date".equals(evt.getPropertyName())) {
+        // Asegurarse de que el evento sea causado por un cambio de fecha
+
+        // Obtener la fecha seleccionada del jdchFecha
+        LocalDate fechaSeleccionada = jdchFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        // Llamar al método para cargar productos por fecha
+        listaDC= dcd.listarProductoPorFecha(fechaSeleccionada);
+        cargarProducto();
+        
+    }        
+       }catch(NullPointerException e){
+           JOptionPane.showMessageDialog(null,"Error al cargar");
+           } 
+       
+    }//GEN-LAST:event_jdchFechaPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -126,8 +164,7 @@ private void editartabla(){
 }
 
 private void cargarProducto() {
-     LocalDate fecha = LocalDate.now(); // Cambia esta línea con la fecha que desees utilizar
-    listaDC= dcd.listarProductoPorFecha(fecha);
+    
     DefaultTableModel model = (DefaultTableModel) jtProdXFecha.getModel();
     model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
 
@@ -143,10 +180,4 @@ private void cargarProducto() {
     }
 }
 
-private void borrarFilaTabla(){
-        int indice= model.getRowCount() -1;
-        for (int i= indice; i>=0; i--){
-            model.removeRow(i);
-        }
-    }
 }
