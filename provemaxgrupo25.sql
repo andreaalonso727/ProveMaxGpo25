@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-10-2023 a las 01:29:30
+-- Tiempo de generación: 23-10-2023 a las 19:16:39
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -47,6 +47,22 @@ CREATE TABLE `detallecompra` (
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Disparadores `detallecompra`
+--
+DELIMITER $$
+CREATE TRIGGER `ActualizarPrecioActual` AFTER INSERT ON `detallecompra` FOR EACH ROW UPDATE producto
+    SET precioActual = NEW.precioCosto * 1.3
+    WHERE idProducto = NEW.idProducto
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `ActualizarStock` AFTER INSERT ON `detallecompra` FOR EACH ROW UPDATE producto
+    SET stock = stock + NEW.cantidad
+    WHERE idProducto = NEW.idProducto
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -57,8 +73,8 @@ CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
   `nombreProducto` varchar(100) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
-  `precioActual` double NOT NULL,
-  `stock` int(11) NOT NULL,
+  `precioActual` double DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -71,9 +87,9 @@ CREATE TABLE `producto` (
 CREATE TABLE `proveedor` (
   `idProveedor` int(11) NOT NULL,
   `razonSocial` varchar(100) NOT NULL,
-  `cuit` int(20) NOT NULL,
+  `cuit` varchar(50) NOT NULL,
   `domicilio` varchar(100) NOT NULL,
-  `telefono` varchar(25) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

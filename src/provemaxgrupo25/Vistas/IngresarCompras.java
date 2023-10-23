@@ -5,18 +5,50 @@
  */
 package provemaxgrupo25.Vistas;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import provemaxgrupo25.Data.CompraData;
+import provemaxgrupo25.Data.DetalleCompraData;
+import provemaxgrupo25.Data.ProductoData;
+import provemaxgrupo25.Data.ProveedorData;
+import provemaxgrupo25.Entidades.Compra;
+import provemaxgrupo25.Entidades.DetalleCompra;
+import provemaxgrupo25.Entidades.Producto;
+import provemaxgrupo25.Entidades.Proveedor;
 
 /**
  *
  * @author HP
  */
 public class IngresarCompras extends javax.swing.JInternalFrame {
-
-   
+    
+    //Instanciar las datas
+    ProductoData produData;
+    ProveedorData proveData;
+    CompraData compData;
+    DetalleCompraData detData;
+    List<Producto> listProd;
+    List<Proveedor> listProv;
+    
+    
     public IngresarCompras() {
         initComponents();
-        jHorarioActual.setText("Fecha Actual: " + LocalDate.now());
+        try{
+            produData = new ProductoData();
+            proveData = new ProveedorData();
+            compData = new CompraData();
+            detData = new DetalleCompraData();
+            listProd = produData.ListarProducto();
+            listProv = proveData.listarProveedor();
+            
+            cargarProducto();
+            cargarProveedor();
+            
+        }catch(Exception e){
+            System.out.println("Falla ni bien carga por los objetos " + e);
+        }
     }
 
     /**
@@ -28,28 +60,55 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jHorarioActual = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jcbProveedor = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jcbProducto = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jtfCantidad = new javax.swing.JTextField();
+        jdcFecha = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        jtfPrecio = new javax.swing.JTextField();
+        jbtnIngresar = new javax.swing.JButton();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setPreferredSize(new java.awt.Dimension(410, 200));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel1.setText("Proveedor");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel1.setText("Proveedor:");
+        jLabel2.setText("Producto");
 
-        jHorarioActual.setText("Horario actual:");
+        jLabel3.setText("Cantidad");
 
-        jButton1.setText("Ingresar ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Fecha");
+
+        jdcFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcFechaPropertyChange(evt);
+            }
+        });
+
+        jLabel5.setText("Precio");
+
+        jbtnIngresar.setBackground(new java.awt.Color(0, 51, 255));
+        jbtnIngresar.setText("Ingresar Pedido");
+        jbtnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jbtnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtnIngresarActionPerformed(evt);
             }
         });
 
@@ -59,53 +118,115 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jHorarioActual)))
-                        .addGap(0, 76, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbProveedor, 0, 260, Short.MAX_VALUE)
+                            .addComponent(jcbProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jbtnIngresar)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jHorarioActual)
+                    .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(156, 156, 156))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jcbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbtnIngresar)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jbtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIngresarActionPerformed
+        try{
+            //Traigo los datos de los input
+            Proveedor prov = (Proveedor) jcbProveedor.getSelectedItem();
+            Producto prod = (Producto) jcbProducto.getSelectedItem();
+            double precio = Double.parseDouble(jtfPrecio.getText());
+            int cantidad = Integer.parseInt(jtfCantidad.getText());
+            LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            //Creo primero el objeto compra y lo mando a la db
+            Compra compra = new Compra(prov, fecha);
+            
+            compData.guardarCompra(compra);
+            
+            //Y segundo el objeto detalleCompra con el compra creado recien y tambien lo paso a db
+            DetalleCompra detcompra = new DetalleCompra(cantidad, precio, compra, prod);
+            
+            detData.guardarDetalleCompra(detcompra);
+            
+        }catch(Exception e){
+            System.out.println("Error " + e);
+        }
+        
+        
+    }//GEN-LAST:event_jbtnIngresarActionPerformed
+
+    private void jdcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcFechaPropertyChange
+
+    }//GEN-LAST:event_jdcFechaPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jHorarioActual;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbtnIngresar;
+    private javax.swing.JComboBox<Producto> jcbProducto;
+    private javax.swing.JComboBox<Proveedor> jcbProveedor;
+    private com.toedter.calendar.JDateChooser jdcFecha;
+    private javax.swing.JTextField jtfCantidad;
+    private javax.swing.JTextField jtfPrecio;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarProducto (){
+        for (Producto item: listProd){
+            jcbProducto.addItem(item);
+                    
+        }
+    }
+    
+    private void cargarProveedor (){
+        for (Proveedor item: listProv){
+            jcbProveedor.addItem(item);
+                    
+        }
+    }
 }

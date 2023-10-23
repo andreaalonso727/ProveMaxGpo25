@@ -78,25 +78,27 @@ public class CompraData {
     
      }
     
-    public Compra buscarCompra (int id){
+    public Compra buscarCompra (Proveedor prove, LocalDate fecha){
             
 
-        String sql="SELECT idCompra, idProveedor, fecha FROM compra WHERE idCompra =?";
+        String sql="SELECT idCompra FROM compra WHERE idProveedor = ? AND fecha = ?";
 
         Compra compra=null;
         
         try {
             PreparedStatement ps= con.prepareStatement(sql);
             
-            ps.setInt(1,id);
+            ps.setInt(1, prove.getIdProveedor());
+            ps.setDate(2, Date.valueOf(fecha));
+            
             ResultSet rs= ps.executeQuery();
             if (rs.next()){
             
              compra=new Compra();
              compra.setIdCompra(rs.getInt("idCompra"));
              compra.setProveedor( new Proveedor());
-             compra.getProveedor().setIdProveedor(rs.getInt("idProveedor"));
-             compra.setFecha(rs.getDate("fecha").toLocalDate());
+             compra.getProveedor().setIdProveedor(prove.getIdProveedor());
+             compra.setFecha(fecha);
                                                                      
                        
             }else {
@@ -177,6 +179,40 @@ public class CompraData {
   
  }
     
+   
+    public Compra buscarCompraId (int id){
+            
+
+        String sql="SELECT idCompra, idProveedor, fecha FROM compra WHERE idCompra=?";
+
+        Compra compra=null;
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            
+            ResultSet rs= ps.executeQuery();
+            if (rs.next()){
+            
+             compra=new Compra();
+             compra.setIdCompra(rs.getInt("idCompra"));
+             compra.setProveedor( new Proveedor());
+             compra.getProveedor().setIdProveedor(rs.getInt("idProveedor"));
+             compra.setFecha(rs.getDate("fecha").toLocalDate());
+                                                                     
+                       
+            }else {
+                JOptionPane.showMessageDialog(null, "No existe la compra");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar la compra");
+        }
+            
+        return compra;    
+        }
     
        /* Todos los productos de una compra en particular. Ej. ¿Qué productos he adquirido en mi última compra?
        /* Aquellos productos que sean los más comprados entre fechas. Ej. ¿Qué productos he comprado más entre f1 y f2?*/

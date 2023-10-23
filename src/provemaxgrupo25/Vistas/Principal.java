@@ -146,8 +146,18 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu8);
 
         jMenu9.setText("Ventas");
+        jMenu9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu9ActionPerformed(evt);
+            }
+        });
 
         jMenuItem12.setText("Ingresar Ventas");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem12);
 
         jMenuItem13.setText("Listar Ventas");
@@ -260,6 +270,19 @@ public class Principal extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_jMenu10MouseClicked
+
+    private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
+            
+    }//GEN-LAST:event_jMenu9ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        IngresarVenta iv =new IngresarVenta();
+        iv.setVisible(true);
+        jEscritorio.add(iv);
+        jEscritorio.moveToFront(iv);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
      * @param args the command line arguments

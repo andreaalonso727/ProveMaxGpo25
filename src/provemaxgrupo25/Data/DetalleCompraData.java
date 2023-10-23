@@ -45,7 +45,8 @@ public void guardarDetalleCompra (DetalleCompra detcom ){
         if(rs.next()){
         
             detcom.setIdDetalle(rs.getInt(1));
-            JOptionPane.showMessageDialog(null,"Detalle de Compra guardada");
+        }else{
+            JOptionPane.showMessageDialog(null, "Error de compra");
         }
         ps.close();              
                 
@@ -102,7 +103,7 @@ public DetalleCompra  buscarDetalle (int id){
              Producto producto= pd.BuscarProducto(rs.getInt("idProducto"));
              detcomp.setProducto(producto);
              CompraData cp= new CompraData();
-             Compra compra=cp.buscarCompra(rs.getInt("idCompra"));
+             Compra compra=cp.buscarCompraId(rs.getInt("idCompra"));
              detcomp.setCompra(compra);
                               
             
@@ -138,7 +139,7 @@ public DetalleCompra  buscarDetalle (int id){
             Producto producto=prodData.BuscarProducto(rs.getInt("idProducto"));
             detcomps.setProducto(producto);
             CompraData comData= new CompraData();
-            Compra compra= comData.buscarCompra(rs.getInt("idCompra"));
+            Compra compra= comData.buscarCompraId(rs.getInt("idCompra"));
             detcomps.setCompra(compra);
             
             listDetCompras.add(detcomps);
@@ -177,7 +178,7 @@ public DetalleCompra  buscarDetalle (int id){
                Producto producto = produD.BuscarProducto(rs.getInt("idProducto"));
                dc.setProducto(producto);
                CompraData comD= new CompraData();
-               Compra compra= comD.buscarCompra(rs.getInt("idCompra"));
+               Compra compra= comD.buscarCompraId(rs.getInt("idCompra"));
                dc.setCompra(compra);
                
                            

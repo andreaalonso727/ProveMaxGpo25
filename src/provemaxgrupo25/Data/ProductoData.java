@@ -203,7 +203,7 @@ public Producto buscarProdNombre (String nombre){
     
     Producto producto = null;
     
-    String sql= "SELECT descripcion,precioActual,stock,estado FROM producto WHERE nombreProducto=?";
+    String sql= "SELECT idProducto,descripcion,precioActual,stock,estado FROM producto WHERE nombreProducto=?";
     
     
      
@@ -216,7 +216,8 @@ public Producto buscarProdNombre (String nombre){
             if (rs.next()){
             
             producto=new Producto();
-            //producto.setIdProducto(rs.getInt("idProducto"));
+            producto.setIdProducto(rs.getInt("idProducto"));
+            producto.setNombreProd(nombre);
             producto.setDescripcion(rs.getNString("descripcion"));
             producto.setPrecioActual(rs.getDouble("precioActual"));
             producto.setStock(rs.getInt("stock"));                                           
