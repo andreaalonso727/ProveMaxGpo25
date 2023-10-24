@@ -50,7 +50,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         jBBuscar1 = new javax.swing.JButton();
         jBGuardar1 = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
-        jBEliminar = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
         jBBuscar2 = new javax.swing.JButton();
 
@@ -90,10 +90,10 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        jBEliminar.setText("Eliminar");
-        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEliminarActionPerformed(evt);
+                jBLimpiarActionPerformed(evt);
             }
         });
 
@@ -156,8 +156,8 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                     .addComponent(jBSalir)
                     .addComponent(jBModificar))
                 .addGap(50, 50, 50)
-                .addComponent(jBEliminar)
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addComponent(jBLimpiar)
+                .addGap(0, 53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +189,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar1)
                     .addComponent(jBModificar)
-                    .addComponent(jBEliminar))
+                    .addComponent(jBLimpiar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jBSalir)
                 .addContainerGap())
@@ -227,7 +227,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
 
 
             }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(this, "Campo Matricula necesario, no debe contener letras, ni caracteres");
+                JOptionPane.showMessageDialog(this, "Campo Cuit necesario, no debe contener letras, ni caracteres");
                 jtCuit.setText("");
                 return;
             }
@@ -299,6 +299,15 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
             String telefono = jtTelef.getText();
             boolean estado = jrEstado.isSelected();
             
+//            if (!razonSocial.matches("^\\d+(\\.\\d+)?$")) {
+//            JOptionPane.showMessageDialog(this, "La Razon Social debe ser solo caracteres.");
+//            return;
+//        }
+            
+            if (!telefono.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser solo números.");
+            return;
+        }
 
             if (razonSocial.isEmpty()|| jtCuit.getText().isEmpty()){
                 
@@ -325,16 +334,16 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBGuardar1ActionPerformed
 
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBEliminarActionPerformed
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar1;
     private javax.swing.JButton jBBuscar2;
-    private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar1;
+    private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLabel1;

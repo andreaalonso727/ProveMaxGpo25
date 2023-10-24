@@ -53,6 +53,8 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
         jRBActivo = new javax.swing.JRadioButton();
         jRBTodos = new javax.swing.JRadioButton();
         jRBbaja = new javax.swing.JRadioButton();
+        jBAlta = new javax.swing.JButton();
+        jBBaja = new javax.swing.JButton();
 
         jTlistProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,6 +116,10 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
+        jBAlta.setText("Alta Proveedor");
+
+        jBBaja.setText("Baja Proveedor");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,16 +129,26 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jBAlta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBBaja)
+                .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 65, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBAlta)
+                    .addComponent(jBBaja))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,6 +164,9 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
             
             ProvActivo();
             
+            jBBaja.setEnabled(true);
+            jBAlta.setEnabled(false);
+            
         }catch(NullPointerException e){
             return;
         }
@@ -161,6 +180,9 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
             jRBTodos.setSelected(false);
             
             ProvBaja();
+            
+            jBAlta.setEnabled(true);
+            jBBaja.setEnabled(false);
             
        }catch(NullPointerException e){
            return;
@@ -176,6 +198,9 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
             
             cargarProveedor();
             
+            jBBaja.setEnabled(false);
+            jBAlta.setEnabled(false);
+            
        }catch(NullPointerException e){
            return;
        }
@@ -183,6 +208,8 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAlta;
+    private javax.swing.JButton jBBaja;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRBActivo;
     private javax.swing.JRadioButton jRBTodos;
