@@ -87,6 +87,10 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel1.setText("Proveedor");
 
         jLabel2.setText("Producto");

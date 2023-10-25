@@ -47,6 +47,8 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setMinimumSize(new java.awt.Dimension(550, 400));
+        setPreferredSize(new java.awt.Dimension(550, 400));
 
         jdchFecha.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {

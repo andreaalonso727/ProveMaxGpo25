@@ -59,6 +59,10 @@ public class IngresarVenta extends javax.swing.JInternalFrame {
         jlPrecioTotal = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("VENTA");

@@ -68,7 +68,7 @@
                                   <Component id="jtCuit" min="-2" pref="142" max="-2" attributes="0"/>
                                   <Component id="jtRazonSocial" min="-2" pref="171" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="46" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jBBuscar1" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jBBuscar2" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -81,9 +81,12 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jBModificar" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="jBLimpiar" min="-2" max="-2" attributes="0"/>
@@ -120,7 +123,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel5" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="jrEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -129,9 +132,9 @@
                   <Component id="jBModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
