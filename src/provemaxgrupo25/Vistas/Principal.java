@@ -228,10 +228,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         jEscritorio.removeAll();
         jEscritorio.repaint();
-        ProductoEntreFechas prodEntrefecha=new ProductoEntreFechas();
-        prodEntrefecha.setVisible(true);
-        jEscritorio.add(prodEntrefecha);
-        jEscritorio.moveToFront(prodEntrefecha);
+        ProductoEntreFechas prodEntrefechas=new ProductoEntreFechas();
+        prodEntrefechas.setVisible(true);
+        jEscritorio.add(prodEntrefechas);
+        jEscritorio.moveToFront(prodEntrefechas);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
