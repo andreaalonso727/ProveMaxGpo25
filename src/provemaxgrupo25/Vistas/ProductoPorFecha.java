@@ -6,30 +6,25 @@ import java.time.ZoneId;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import provemaxgrupo25.Data.CompraData;
 import provemaxgrupo25.Data.DetalleCompraData;
-import provemaxgrupo25.Data.ProductoData;
 import provemaxgrupo25.Entidades.*;
 
 
 public class ProductoPorFecha extends javax.swing.JInternalFrame {
 
     private DefaultTableModel model;
-     private ProductoData pd;
      private DetalleCompraData dcd;
-     private CompraData cd;
      private List<DetalleCompra> listaDC;
      
     public ProductoPorFecha() {
         initComponents();
         model= new DefaultTableModel();
-        pd= new ProductoData();
         dcd= new DetalleCompraData();
         LocalDate fecha = LocalDate.now();
         listaDC= dcd.listarProductoPorFecha(fecha);
         jdchFecha.addPropertyChangeListener(evt -> jdchFechaPropertyChange(evt));
         editartabla();
-        cargarProducto();
+        
         
     }
 
@@ -126,17 +121,14 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
 
     private void jdchFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdchFechaPropertyChange
        try{
-        if ("date".equals(evt.getPropertyName())) {
-        // Asegurarse de que el evento sea causado por un cambio de fecha
-
+        
+          if ("date".equals(evt.getPropertyName())) { 
         // Obtener la fecha seleccionada del jdchFecha
         LocalDate fechaSeleccionada = jdchFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-        // Llamar al método para cargar productos por fecha
-        listaDC= dcd.listarProductoPorFecha(fechaSeleccionada);
-        cargarProducto();
-        
-    }        
+  
+        cargarProducto(fechaSeleccionada);
+          } 
+            
        }catch(NullPointerException e){
            JOptionPane.showMessageDialog(null,"Error al cargar");
            } 
@@ -154,30 +146,30 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
 
 private void editartabla(){
     
-    model.addColumn("IdDetalleCompra");
+    model.addColumn("Nombre Producto");
     model.addColumn("Cantidad");
     model.addColumn("Precio Costo");
-    model.addColumn("IdProducto");
-    model.addColumn("IdCompra");
-    model.addColumn("Fecha Compra");
+    
     jtProdXFecha.setModel(model); 
 }
 
-private void cargarProducto() {
+private void cargarProducto(LocalDate fecha) {
+    listaDC= dcd.listarProductoPorFecha(fecha);
     
-    DefaultTableModel model = (DefaultTableModel) jtProdXFecha.getModel();
     model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
-
-    for (DetalleCompra item : listaDC) {
-        model.addRow(new Object[]{
-            item.getIdDetalle(),
+    if (listaDC.isEmpty()){
+    
+    JOptionPane.showMessageDialog(this, "Lista Vacia" );
+    }else {
+        for (DetalleCompra item : listaDC) {
+            model.addRow(new Object[]{
+            item.getProducto().getNombreProd(),
             item.getCantidad(),
-            item.getPrecioCosto(),
-            item.getProducto().getIdProducto(),
-            item.getCompra().getIdCompra(),
-            item.getCompra().getFecha(),
+            item.getPrecioCosto()
+           
+            
         });
     }
 }
-
+}
 }

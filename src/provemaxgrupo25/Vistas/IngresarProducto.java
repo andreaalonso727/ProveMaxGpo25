@@ -244,8 +244,8 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
                  //JOptionPane.showMessageDialog(null, "No existe ese producto");
              
              
-        }catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Error al buscar el producto");
+        }catch(NullPointerException e){
+           return;
         }
         //limpiarCampos();
     }//GEN-LAST:event_jbBuscarActionPerformed

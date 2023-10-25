@@ -161,44 +161,6 @@ public class ProductoData {
     }
 
 /*Aquellos productos que sean los más comprados entre fechas. Ej. ¿Qué productos he comprado más entre f1 y f2?*/
-
-    public List<Producto> ProdEntrefechas(LocalDate f1, LocalDate f2){
-        String sql= "SELECT p.nombreProducto, p.stock\n" +
-                    "FROM detallecompra dc \n" +
-                    "JOIN producto p ON dc.idProducto = p.idProducto\n" +
-                    "JOIN compra c ON dc.idCompra = c.idCompra\n" +
-                    "WHERE c.fecha BETWEEN ? AND ? ";
-        
-        ArrayList<Producto> productos= new ArrayList<>();
-        
-
-        try {
-            
-            PreparedStatement ps=con.prepareStatement(sql);
-            
-            ps.setDate(1, Date.valueOf(f1));
-            ps.setDate(2, Date.valueOf(f2));
-            
-            ResultSet rs=ps.executeQuery();
-            
-            while(rs.next()){
-                Producto producto=new Producto();
-                
-                producto.setNombreProd(rs.getString("nombreProducto"));
-                producto.setEstado(rs.getBoolean("estado"));
-                producto.setStock(rs.getInt("stock"));
-                
-                productos.add(producto);
-                
-                
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al buscar un producto");
-            
-        }
-        return productos;
-    }
 public Producto buscarProdNombre (String nombre){
     
     Producto producto = null;

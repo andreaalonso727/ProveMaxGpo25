@@ -160,7 +160,11 @@ public DetalleCompra  buscarDetalle (int id){
     
     public List<DetalleCompra> listarProductoPorFecha (LocalDate fecha){
             
-        String sql="SELECT dc.idDetalle, dc.cantidad, dc.precioCosto, dc.idProducto, dc.idCompra, c.fecha AS fechaCompra FROM DetalleCompra dc INNER JOIN Compra c ON dc.idCompra = c.idCompra WHERE c.fecha = ? ";
+        String sql="SELECT p.nombreProducto, dc.cantidad, dc.precioCosto \n" +
+        "FROM DetalleCompra dc \n" +
+        "JOIN Compra c ON dc.idCompra = c.idCompra \n" +
+        "JOIN Producto p ON dc.idProducto = p.idProducto\n" +
+        "WHERE c.fecha = ?";
         
         ArrayList<DetalleCompra> listarProdXFchaCom= new ArrayList<>();
         
@@ -171,16 +175,12 @@ public DetalleCompra  buscarDetalle (int id){
             while (rs.next()){
             
                DetalleCompra dc= new DetalleCompra();
-               dc.setIdDetalle(rs.getInt("idDetalle"));
+               
                dc.setCantidad(rs.getInt("cantidad"));
                dc.setPrecioCosto(rs.getDouble("precioCosto"));
-               ProductoData produD= new ProductoData ();
-               Producto producto = produD.BuscarProducto(rs.getInt("idProducto"));
-               dc.setProducto(producto);
-               CompraData comD= new CompraData();
-               Compra compra= comD.buscarCompraId(rs.getInt("idCompra"));
-               dc.setCompra(compra);
-               
+               dc.setProducto(new Producto());
+               dc.getProducto().setNombreProd(rs.getString("nombreProducto"));
+                             
                            
                listarProdXFchaCom.add(dc);
                           
@@ -193,6 +193,43 @@ public DetalleCompra  buscarDetalle (int id){
             
         return listarProdXFchaCom;    
         }
+    
+    public List<DetalleCompra> ProdEntrefechas(LocalDate f1, LocalDate f2){
+        String sql= "SELECT dc.idDetalle, p.nombreProducto, c.fecha\n" +
+                    "FROM detallecompra dc \n" +
+                    "JOIN producto p ON dc.idProducto = p.idProducto\n" +
+                    "JOIN compra c ON dc.idCompra = c.idCompra\n" +
+                    "WHERE c.fecha BETWEEN ? AND ? ";
+        
+        ArrayList<DetalleCompra> productos= new ArrayList<>();
+        
+
+        try {
+            
+            PreparedStatement ps=con.prepareStatement(sql);
+            
+            ps.setDate(1, Date.valueOf(f1));
+            ps.setDate(2, Date.valueOf(f2));
+            
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                DetalleCompra detallecompra=new DetalleCompra();
+                detallecompra.setIdDetalle(rs.getInt("IdDetalle"));
+                detallecompra.setProducto(new Producto());
+                detallecompra.getProducto().setNombreProd(rs.getString("nombreProducto"));
+                detallecompra.setCompra(new Compra());
+                detallecompra.getCompra().setFecha(rs.getDate("fecha").toLocalDate());
+                productos.add(detallecompra);
+                  
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al buscar un producto");
+            
+        }
+        return productos;
+    }
     }
     
 
