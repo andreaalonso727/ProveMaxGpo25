@@ -82,6 +82,8 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jtfCantidad.setEditable(false);
+
         jrbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbEstadoActionPerformed(evt);
@@ -260,17 +262,17 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
 
         // Validar que los campos de cantidad y precio contengan solo números
         
-        if (!precioText.matches("^\\d+(\\.\\d+)?$")) {
-            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
-            return;
-        }
-        if (!cantidadText.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.");
-            return;
-        }
+//        if (!precioText.matches("^\\d+(\\.\\d+)?$")) {
+//            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
+//            return;
+//        }
+//        if (!cantidadText.matches("\\d+")) {
+//            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.");
+//            return;
+//        }
 
-        int cantidad = Integer.parseInt(cantidadText);
-        double precio = Double.parseDouble(precioText);
+//        int cantidad = Integer.parseInt(cantidadText);
+//        double precio = Double.parseDouble(precioText);
 
         boolean estado = jrbEstado.isSelected();
 
@@ -279,7 +281,7 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
             return;
         } else {
             // Crear el objeto producto con las variables como parámetros
-            Producto producto = new Producto(nom, descripcion, precio, cantidad, estado);
+            Producto producto = new Producto(nom, descripcion, 0, 0, estado);
 
             // Pasamos el objeto producto al método que lo guarda en la base de datos
             pd.RegistrarProducto(producto);

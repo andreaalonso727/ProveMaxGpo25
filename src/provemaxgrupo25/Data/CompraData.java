@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import provemaxgrupo25.Entidades.Compra;
+import provemaxgrupo25.Entidades.DetalleCompra;
+import provemaxgrupo25.Entidades.Producto;
 import provemaxgrupo25.Entidades.Proveedor;
 
 
@@ -115,7 +117,7 @@ public class CompraData {
     
     public List<Compra> listarCompra (){
             
-        String sql="SELECT idCompra, idProveedor, fecha FROM compra ";
+        String sql="SELECT prov.razonSocial, com.idCompra, com.idProveedor, com.fecha FROM compra com JOIN proveedor prov ON com.idProveedor = prov.idProveedor ORDER BY com.idCompra";
        
         ArrayList<Compra> compras= new ArrayList<>();
         
@@ -129,6 +131,7 @@ public class CompraData {
             compra.setIdCompra(rs.getInt("idCompra"));
             compra.setProveedor(new Proveedor());
             compra.getProveedor().setIdProveedor(rs.getInt("idProveedor"));
+            compra.getProveedor().setRazonSocial(rs.getString("razonSocial"));
             compra.setFecha(rs.getDate("fecha").toLocalDate());
            
            
@@ -148,7 +151,7 @@ public class CompraData {
    public List<Compra> listarCompraPorProveedor (int idProveedor){
  
      ArrayList<Compra> compraXProveedores= new ArrayList<>();
-     String sql= "SELECT p. razonSocial, cuit, domicilio, telefono, estado \n" +
+     String sql= "SELECT p.razonSocial, p.cuit, p.domicilio, p.telefono, p.estado \n" +
                 "FROM compra com JOIN proveedor p ON com.idProveedor = p.idProveedor \n" + "WHERE com.idProveedor=?";
      
        try {
@@ -216,6 +219,45 @@ public class CompraData {
     
        /* Todos los productos de una compra en particular. Ej. ¿Qué productos he adquirido en mi última compra?
        /* Aquellos productos que sean los más comprados entre fechas. Ej. ¿Qué productos he comprado más entre f1 y f2?*/
-
-    
+        
+       public List<DetalleCompra> listarProductosxCompra (int idCompra){
+ 
+     ArrayList<DetalleCompra> listarProductosEnCompras= new ArrayList<>();
+     String sql= "SELECT prov.razonSocial, pro.nombreProducto, dc.cantidad, dc.precioCosto, com.fecha\n" +
+                "FROM compra com\n" +
+                "JOIN proveedor prov ON com.idProveedor = prov.idProveedor\n" +
+                "JOIN detallecompra dc ON com.idCompra = dc.idCompra\n" +
+                "JOIN producto pro ON dc.idProducto = pro.idProducto\n" +
+                "WHERE com.idCompra = ?;";
+     
+       try {
+           PreparedStatement ps = con.prepareStatement(sql);
+           
+           ps.setInt(1, idCompra);
+           ResultSet rs = ps.executeQuery();
+           
+           while (rs.next()){
+               
+               DetalleCompra dc = new DetalleCompra();
+               dc.setCompra(new Compra());
+               dc.setProducto(new Producto());
+               dc.getCompra().setProveedor(new Proveedor());
+               dc.getCompra().getProveedor().setRazonSocial(rs.getString("razonSocial"));
+               dc.getProducto().setNombreProd(rs.getString("nombreProducto"));
+               dc.setCantidad(rs.getInt("cantidad"));
+               dc.setPrecioCosto(rs.getDouble("precioCosto"));
+               dc.getCompra().setFecha(rs.getDate("fecha").toLocalDate());
+               listarProductosEnCompras.add(dc);
+                                        
+           }
+           
+           ps.close();
+            
+       } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null,"Error al acceder a las tablas " + ex.getMessage());
+       }
+       return listarProductosEnCompras;   
+  
+ }
+        
 }

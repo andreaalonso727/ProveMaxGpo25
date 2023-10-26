@@ -57,7 +57,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,6 +144,26 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
+        jMenu8.setText("Compras");
+
+        jMenuItem14.setText("Comprar productos");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem14);
+
+        jMenuItem15.setText("Lista de compras");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem15);
+
+        jMenuBar1.add(jMenu8);
+
         jMenu9.setText("Ventas");
         jMenu9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,9 +178,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu9.add(jMenuItem12);
-
-        jMenuItem13.setText("Listar Ventas");
-        jMenu9.add(jMenuItem13);
 
         jMenuBar1.add(jMenu9);
 
@@ -272,7 +288,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu10MouseClicked
 
     private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
-            
+
     }//GEN-LAST:event_jMenu9ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
@@ -283,6 +299,15 @@ public class Principal extends javax.swing.JFrame {
         jEscritorio.add(iv);
         jEscritorio.moveToFront(iv);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ListarCompras lc= new ListarCompras();
+        lc.setVisible(true);
+        jEscritorio.add(lc);
+        jEscritorio.moveToFront(lc);
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,7 +358,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem3;
