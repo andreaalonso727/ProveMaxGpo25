@@ -152,11 +152,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Alta Proveedor"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAltaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBBaja">
       <Properties>
         <Property name="text" type="java.lang.String" value="Baja Proveedor"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBBajaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

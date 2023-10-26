@@ -6,6 +6,7 @@
 package provemaxgrupo25.Vistas;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import provemaxgrupo25.Data.ProveedorData;
 import provemaxgrupo25.Entidades.Proveedor;
@@ -121,8 +122,18 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
         );
 
         jBAlta.setText("Alta Proveedor");
+        jBAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAltaActionPerformed(evt);
+            }
+        });
 
         jBBaja.setText("Baja Proveedor");
+        jBBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBajaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,6 +220,34 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
            return;
        }
     }//GEN-LAST:event_jRBTodosActionPerformed
+
+    private void jBAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAltaActionPerformed
+      int filaSeleccionada = jTlistProv.getSelectedRow();
+    if (filaSeleccionada != -1) {
+        int idProducto = (Integer) model.getValueAt(filaSeleccionada, 0);
+        provData.CambiarEstadoProvT(idProducto);// Suponiendo que provData es una instancia válida de la clase que contiene el método EliminarProducto
+        borrarFilaTabla(); // Suponiendo que tienes una función para borrar la fila en la posición especificada
+    } else {
+        JOptionPane.showMessageDialog(this, "Usted debe seleccionar una fila de la tabla");
+    }
+        
+        
+    }//GEN-LAST:event_jBAltaActionPerformed
+
+    private void jBBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBajaActionPerformed
+        int filasSelec = jTlistProv.getSelectedRow();
+        if(filasSelec !=-1){
+           
+           int idProducto = (Integer) model.getValueAt(filasSelec, 0); 
+           provData.CambiarEstadoProveedor(idProducto);
+                      
+           
+            borrarFilaTabla();
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "Usted debe seleccionar una fila de la tabla");
+        }
+    }//GEN-LAST:event_jBBajaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

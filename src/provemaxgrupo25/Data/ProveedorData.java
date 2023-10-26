@@ -340,5 +340,38 @@ public List<Proveedor> obtenerProveedorPorProducto (String nombreprod){
        return ProveedoresXProducto;   
   
  }
-    
+  public void CambiarEstadoProveedor(int idProveedor) {
+    String sql = "UPDATE proveedor SET estado = false WHERE idProveedor = ?";
+    PreparedStatement ps;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, idProveedor); // Establecer el ID del producto que deseas cambiar
+
+        int exito = ps.executeUpdate();
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Estado del proveedor cambiado a 'false'");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo cambiar el estado del proveedor");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado del proveedor");
+    }
+}
+  public void CambiarEstadoProvT(int idProveedor) {
+    String sql = "UPDATE proveedor SET estado = true WHERE idProveedor = ?";
+    PreparedStatement ps;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, idProveedor); // Establecer el ID del producto que deseas cambiar
+
+        int exito = ps.executeUpdate();
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Estado del proveedor cambiado a 'true'");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo cambiar el estado del proveedor");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al cambiar el estado del proveedor");
+    }
+}  
 }

@@ -251,7 +251,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         
         
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Error al buscar alumno");
+            JOptionPane.showMessageDialog(this, "Error al buscar el proveedor");
             jtCuit.setText("");
         }catch(NullPointerException e){            
             return;
@@ -271,7 +271,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         
         
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Error al buscar alumno");
+            JOptionPane.showMessageDialog(this, "Error al buscar el proveedor");
             jtRazonSocial.setText("");
         }catch(NullPointerException e){            
             return;
