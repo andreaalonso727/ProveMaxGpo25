@@ -67,6 +67,8 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jbtnIngresar = new javax.swing.JButton();
         jtfPrecio = new javax.swing.JTextField();
@@ -83,8 +85,25 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
         jtProductos = new javax.swing.JTable();
         jbtnCarrito = new javax.swing.JButton();
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jbtnIngresar.setText("Ingresar Pedido");
-        jbtnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jbtnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jbtnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnIngresarActionPerformed(evt);
@@ -270,6 +289,8 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnCarrito;
     private javax.swing.JButton jbtnIngresar;
     private javax.swing.JComboBox<Producto> jcbProducto;

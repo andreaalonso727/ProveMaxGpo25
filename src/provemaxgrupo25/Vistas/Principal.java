@@ -5,8 +5,10 @@
  */
 package provemaxgrupo25.Vistas;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,11 +20,10 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form principal
-     */
+    
     public Principal() {
         initComponents();
+        setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     /**
@@ -43,9 +44,9 @@ public class Principal extends javax.swing.JFrame {
             }
         };
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -60,25 +61,32 @@ public class Principal extends javax.swing.JFrame {
         jMenu10 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Provemax");
         setBackground(new java.awt.Color(204, 204, 0));
         setIconImages(null);
+        setPreferredSize(new java.awt.Dimension(900, 700));
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.darkGray));
 
-        jMenu8.setText("Compras");
+        jMenu11.setText("Compras");
 
-        jMenuItem14.setText("Ingresar Compra");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem16.setText("Comprar productos");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem14ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem14);
+        jMenu11.add(jMenuItem16);
 
-        jMenuItem15.setText("Detalle de Compra");
-        jMenu8.add(jMenuItem15);
+        jMenuItem17.setText("Lista de compras");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem17);
 
-        jMenuBar1.add(jMenu8);
+        jMenuBar1.add(jMenu11);
 
         jMenu6.setText("Productos");
 
@@ -143,26 +151,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu7.add(jMenuItem9);
 
         jMenuBar1.add(jMenu7);
-
-        jMenu8.setText("Compras");
-
-        jMenuItem14.setText("Comprar productos");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu8.add(jMenuItem14);
-
-        jMenuItem15.setText("Lista de compras");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu8.add(jMenuItem15);
-
-        jMenuBar1.add(jMenu8);
 
         jMenu9.setText("Ventas");
         jMenu9.addActionListener(new java.awt.event.ActionListener() {
@@ -351,15 +339,15 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jEscritorio;
     private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
