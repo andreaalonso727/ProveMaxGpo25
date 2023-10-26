@@ -330,13 +330,6 @@ private void cargarProducto() {
     }
 }
 
-
-
-
-
-
-
-
 }
     
     

@@ -260,19 +260,19 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
             String precioText = jtfPrecio.getText();
             String cantidadText = jtfCantidad.getText();
 
-        // Validar que los campos de cantidad y precio contengan solo números
+//         Validar que los campos de cantidad y precio contengan solo números
         
-//        if (!precioText.matches("^\\d+(\\.\\d+)?$")) {
-//            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
-//            return;
-//        }
-//        if (!cantidadText.matches("\\d+")) {
-//            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.");
-//            return;
-//        }
+        if (!precioText.matches("^\\d+(\\.\\d+)?$")) {
+            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
+            return;
+        }
+        if (!cantidadText.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.");
+            return;
+        }
 
-//        int cantidad = Integer.parseInt(cantidadText);
-//        double precio = Double.parseDouble(precioText);
+        int cantidad = Integer.parseInt(cantidadText);
+        double precio = Double.parseDouble(precioText);
 
         boolean estado = jrbEstado.isSelected();
 
@@ -294,38 +294,6 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
     }
-
-//          try{
-//            Extraer los dato que se da en el view
-//            String nom = jtfNombre.getText();
-//            String descripcion = jtfDescripcion.getText();
-//            int cantidad = Integer.parseInt(jtfCantidad.getText());
-//            double precio = Double.parseDouble(jtfPrecio.getText());
-//            
-//            boolean estado = jrbEstado.isSelected();
-//            
-//            
-//
-//            if(nom.isEmpty() || descripcion.isEmpty()){
-//                
-//                JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
-//                return;
-//                
-//            }else{
-//                
-//                Crear el objeto alumno con las variables como parametros
-//                Producto producto = new Producto(nom, descripcion, precio, cantidad, estado);
-//
-//                Pasamos es onjeto alumno al metodo que lo guarde en la db
-//                pd.RegistrarProducto(producto);
-//            }
-//            
-//            limpiarCampos();
-//
-//           
-//        }catch(Exception e){
-//            System.out.println(e);
-//        }
     }//GEN-LAST:event_jbIngresarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
