@@ -20,9 +20,9 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
         initComponents();
         model= new DefaultTableModel();
         dcd= new DetalleCompraData();
-        LocalDate fecha = LocalDate.now();
-        listaDC= dcd.listarProductoPorFecha(fecha);
-        jdchFecha.addPropertyChangeListener(evt -> jdchFechaPropertyChange(evt));
+//        LocalDate fecha = LocalDate.now();
+//        listaDC= dcd.listarProductoPorFecha(fecha);
+//        jdchFecha.addPropertyChangeListener(evt -> jdchFechaPropertyChange(evt));
         editartabla();
         
         
@@ -118,7 +118,7 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jdchFechaInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jdchFechaInputMethodTextChanged
-       System.out.print("error");
+//       System.out.print("error");
     }//GEN-LAST:event_jdchFechaInputMethodTextChanged
 
     private void jdchFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdchFechaPropertyChange
@@ -161,7 +161,7 @@ private void cargarProducto(LocalDate fecha) {
     model.setRowCount(0); // Limpia la tabla antes de cargar nuevos datos
     if (listaDC.isEmpty()){
     
-    JOptionPane.showMessageDialog(this, "Lista Vacia" );
+        JOptionPane.showMessageDialog(this, "Lista Vacia" );
     }else {
         for (DetalleCompra item : listaDC) {
             model.addRow(new Object[]{
