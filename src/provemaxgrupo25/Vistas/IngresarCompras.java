@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import provemaxgrupo25.Data.CompraData;
 import provemaxgrupo25.Data.DetalleCompraData;
@@ -43,7 +44,15 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             proveData = new ProveedorData();
             compData = new CompraData();
             detData = new DetalleCompraData();
-            model = new DefaultTableModel();
+            
+            model = new DefaultTableModel(){
+                @Override
+                public boolean isCellEditable(int fila, int col) {
+                    return col != 0; 
+                }
+                
+            };
+            
             carrito = new ArrayList<>();
             listProd = produData.ListarProducto();
             listProv = proveData.listarProveedor();
@@ -67,8 +76,6 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jbtnIngresar = new javax.swing.JButton();
         jtfPrecio = new javax.swing.JTextField();
@@ -83,20 +90,8 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProductos = new javax.swing.JTable();
-        jbtnCarrito = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        jbtnAgCarrito = new javax.swing.JButton();
+        jbtnSaCarrito1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -139,10 +134,17 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtProductos);
 
-        jbtnCarrito.setText("Agregar al carrito");
-        jbtnCarrito.addActionListener(new java.awt.event.ActionListener() {
+        jbtnAgCarrito.setText("Agregar al carrito");
+        jbtnAgCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnCarritoActionPerformed(evt);
+                jbtnAgCarritoActionPerformed(evt);
+            }
+        });
+
+        jbtnSaCarrito1.setText("Sacar del carrito");
+        jbtnSaCarrito1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSaCarrito1ActionPerformed(evt);
             }
         });
 
@@ -180,8 +182,10 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
                                 .addGap(121, 121, 121)
                                 .addComponent(jbtnIngresar))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jbtnCarrito)))
+                        .addGap(55, 55, 55)
+                        .addComponent(jbtnAgCarrito)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnSaCarrito1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -207,7 +211,9 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
                     .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbtnCarrito)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnAgCarrito)
+                    .addComponent(jbtnSaCarrito1))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -265,7 +271,7 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbtnIngresarActionPerformed
 
-    private void jbtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCarritoActionPerformed
+    private void jbtnAgCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgCarritoActionPerformed
         try {
             Producto prod = (Producto) jcbProducto.getSelectedItem();
             double precio = Double.parseDouble(jtfPrecio.getText());
@@ -275,10 +281,29 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
 
             carrito.add(detalle); // Agrega el detalle al carrito
             actualizarTablaCarrito(); // Actualiza la tabla del carrito
+            
+            jtfCantidad.setText("");
+            jtfPrecio.setText("");
+            
         } catch (Exception e) {
             System.out.println("Error " + e);
         }
-    }//GEN-LAST:event_jbtnCarritoActionPerformed
+    }//GEN-LAST:event_jbtnAgCarritoActionPerformed
+
+    private void jbtnSaCarrito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaCarrito1ActionPerformed
+        try{
+            int filaSelec = jtProductos.getSelectedRow();
+            
+            if(filaSelec !=-1){ 
+                model.removeRow(filaSelec);
+
+            }else {
+                JOptionPane.showMessageDialog(this, "Usted debe seleccionar una fila de la tabla");
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jbtnSaCarrito1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -289,10 +314,9 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JButton jbtnCarrito;
+    private javax.swing.JButton jbtnAgCarrito;
     private javax.swing.JButton jbtnIngresar;
+    private javax.swing.JButton jbtnSaCarrito1;
     private javax.swing.JComboBox<Producto> jcbProducto;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private com.toedter.calendar.JDateChooser jdcFecha;
@@ -324,16 +348,20 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
         }
     
     private void actualizarTablaCarrito() {
-    // Limpia la tabla actual
-    model.setRowCount(0);
+        model.setRowCount(0);
 
-    // Agrega los detalles de compra actuales al carrito en la tabla
-    for (DetalleCompra detalle : carrito) {
-        model.addRow(new Object[]{
-            detalle.getProducto().getNombreProd(),
-            detalle.getPrecioCosto(),
-            detalle.getCantidad()
-        });
+        // Agrega los detalles de compra actuales al carrito en la tabla
+        for (DetalleCompra detalle : carrito) {
+            model.addRow(new Object[]{
+                detalle.getProducto().getNombreProd(),
+                detalle.getPrecioCosto(),
+                detalle.getCantidad()
+            });
+        }
     }
-}
+    
+    private void borrarFilaTabla(){
+        model.setRowCount(0);
+        jtProductos.repaint();
+    }
 }

@@ -27,13 +27,20 @@ public class ListarCompras extends javax.swing.JInternalFrame {
     public ListarCompras() {
         super();
         compData = new CompraData();
-        model= new DefaultTableModel();
+        model= new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int i, int i1) {
+                return false;
+            }
+            
+        };
         initComponents();
         
         try{
             listComp = compData.listarCompra();
             cargarCompra();
             editarCabezera();
+            borrarFilaTabla();
         }catch(NumberFormatException e){
             System.out.println("error 1:" + e);
         }
