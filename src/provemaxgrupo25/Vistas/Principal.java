@@ -24,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setExtendedState(this.MAXIMIZED_BOTH);
+        setIconImage(new ImageIcon(getClass().getResource("/imagen/icon.png")).getImage());
     }
 
     /**
@@ -35,7 +36,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagen/imgprincipal.jpg/"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagen/imgprincipal.png/"));
         Image image = icon.getImage();
         jEscritorio = new javax.swing.JDesktopPane(){
 
@@ -183,11 +184,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
         );
 
         pack();
