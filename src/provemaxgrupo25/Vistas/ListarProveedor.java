@@ -142,7 +142,7 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
@@ -269,7 +269,6 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
     model.addColumn("Cuit");
     model.addColumn("Domicilio");
     model.addColumn("Telefono");
-    model.addColumn("Estado");
     jTlistProv.setModel(model); 
     }
 
@@ -291,8 +290,7 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
             item.getRazonSocial(),
             item.getCuit(),
             item.getDomicilio(),
-            item.getTelefono(),
-           // item.isEstado()
+            item.getTelefono()
         });
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2023 a las 19:16:39
+-- Tiempo de generación: 28-10-2023 a las 00:25:13
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -87,7 +87,7 @@ CREATE TABLE `producto` (
 CREATE TABLE `proveedor` (
   `idProveedor` int(11) NOT NULL,
   `razonSocial` varchar(100) NOT NULL,
-  `cuit` varchar(50) NOT NULL,
+  `cuit` varchar(12) NOT NULL,
   `domicilio` varchar(100) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `estado` tinyint(1) NOT NULL

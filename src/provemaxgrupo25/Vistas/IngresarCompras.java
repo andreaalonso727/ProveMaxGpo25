@@ -265,8 +265,10 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             carrito.clear();
             actualizarTablaCarrito();;
 
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "solo se puede registrar numeros");
         }catch(Exception e){
-            System.out.println("Error " + e);
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
     }//GEN-LAST:event_jbtnIngresarActionPerformed
@@ -285,8 +287,11 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             jtfCantidad.setText("");
             jtfPrecio.setText("");
             
-        } catch (Exception e) {
-            System.out.println("Error " + e);
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "solo se puede registrar numeros");
+
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_jbtnAgCarritoActionPerformed
 
@@ -342,8 +347,8 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     private void editarCabezera(){
     
             model.addColumn("Producto");
-            model.addColumn("Cantidad");
             model.addColumn("Precio");
+            model.addColumn("Cantidad");
             jtProductos.setModel(model); 
         }
     

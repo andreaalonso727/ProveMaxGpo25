@@ -163,7 +163,7 @@ public class CompraData {
                Compra compra = new Compra();
                compra.setProveedor (new Proveedor());
                compra.getProveedor().setRazonSocial(rs.getString("razonSocial"));
-               compra.getProveedor().setCuit(rs.getInt("cuit"));
+               compra.getProveedor().setCuit(rs.getString("cuit"));
                compra.getProveedor().setDomicilio(rs.getString("domicilio"));
                compra.getProveedor().setTelefono(rs.getNString("telefono"));
                compra.getProveedor().setEstado(rs.getBoolean("estado"));

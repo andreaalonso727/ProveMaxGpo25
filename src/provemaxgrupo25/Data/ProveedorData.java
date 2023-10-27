@@ -28,7 +28,7 @@ public class ProveedorData {
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
-            ps.setInt(4, proveedor.getCuit());
+            ps.setString(4, proveedor.getCuit());
             ps.setBoolean(5, proveedor.isEstado());
             
             ps.executeUpdate();
@@ -57,7 +57,7 @@ public class ProveedorData {
         try {
             PreparedStatement ps= con.prepareStatement(sql);
            
-            ps.setInt(1, proveedor.getCuit());
+            ps.setString(1, proveedor.getCuit());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3,proveedor.getTelefono());
             ps.setBoolean(4, proveedor.isEstado());
@@ -124,7 +124,7 @@ public class ProveedorData {
              proveedor=new Proveedor();
              proveedor.setIdProveedor(id);
              proveedor.setRazonSocial(rs.getNString("razonSocial"));
-             proveedor.setCuit(rs.getInt("cuit"));
+             proveedor.setCuit(rs.getString("cuit"));
              proveedor.setDomicilio(rs.getString("domicilio"));
              proveedor.setTelefono(rs.getString("telefono"));
              proveedor.setEstado(rs.getBoolean("estado"));
@@ -157,7 +157,7 @@ public class ProveedorData {
                 Proveedor proveedor=new Proveedor();
                 proveedor.setIdProveedor(rs.getInt("idProveedor"));
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
-                proveedor.setCuit(rs.getInt("cuit"));
+                proveedor.setCuit(rs.getString("cuit"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
                 proveedor.setTelefono(rs.getString("telefono"));
                 proveedor.setEstado(false);
@@ -187,7 +187,7 @@ public List<Proveedor> TodosProveed(){
                 Proveedor proveedor=new Proveedor();
                 proveedor.setIdProveedor(rs.getInt("idProveedor"));
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
-                proveedor.setCuit(rs.getInt("cuit"));
+                proveedor.setCuit(rs.getString("cuit"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
                 proveedor.setTelefono(rs.getString("telefono"));
                 proveedor.setEstado(rs.getBoolean("estado"));
@@ -220,7 +220,7 @@ public List<Proveedor> TodosProveed(){
              proveedor.setRazonSocial(razonSocial);
              proveedor.setDomicilio(rs.getString("domicilio"));
              proveedor.setTelefono(rs.getString("telefono"));
-             proveedor.setCuit(rs.getInt("cuit"));
+             proveedor.setCuit(rs.getString("cuit"));
              proveedor.setEstado(rs.getBoolean("estado"));
                                
                        
@@ -236,7 +236,7 @@ public List<Proveedor> TodosProveed(){
         return proveedor;    
         }
     
-    public Proveedor buscarProveXCuit (int cuit){
+    public Proveedor buscarProveXCuit (String cuit){
             
 
         String sql="SELECT razonSocial,domicilio,telefono,estado FROM proveedor WHERE cuit =?";
@@ -246,7 +246,7 @@ public List<Proveedor> TodosProveed(){
         try {
             PreparedStatement ps= con.prepareStatement(sql);
             
-            ps.setInt(1,cuit);
+            ps.setString(1,cuit);
             ResultSet rs= ps.executeQuery();
             if (rs.next()){
             
@@ -286,7 +286,7 @@ public List<Proveedor> TodosProveed(){
             proveedor.setIdProveedor(rs.getInt("idProveedor"));
             proveedor.setRazonSocial(rs.getString("razonSocial"));
             proveedor.setDomicilio(rs.getString("domicilio"));
-            proveedor.setCuit(rs.getInt("cuit"));
+            proveedor.setCuit(rs.getString("cuit"));
             proveedor.setTelefono(rs.getString("telefono"));
             proveedor.setEstado(true);
             
@@ -324,7 +324,7 @@ public List<Proveedor> obtenerProveedorPorProducto (String nombreprod){
                Proveedor proveedor= new Proveedor();
                proveedor.setIdProveedor(rs.getInt("IdProveedor"));
                proveedor.setRazonSocial(rs.getNString("razonSocial"));
-               proveedor.setCuit(rs.getInt("cuit"));
+               proveedor.setCuit(rs.getString("cuit"));
                proveedor.setDomicilio(rs.getString("domicilio"));
                proveedor.setTelefono(rs.getNString("telefono"));
                proveedor.setEstado(rs.getBoolean("estado"));

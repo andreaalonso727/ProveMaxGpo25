@@ -257,24 +257,24 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
              // Extraer los datos que se ingresan en el view
             String nom = jtfNombre.getText();
             String descripcion = jtfDescripcion.getText();
-            String precioText = jtfPrecio.getText();
-            String cantidadText = jtfCantidad.getText();
+            boolean estado = jrbEstado.isSelected();
+//            String precioText = jtfPrecio.getText();
+//            String cantidadText = jtfCantidad.getText();
 
 //         Validar que los campos de cantidad y precio contengan solo números
         
-        if (!precioText.matches("^\\d+(\\.\\d+)?$")) {
-            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
-            return;
-        }
-        if (!cantidadText.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.");
-            return;
-        }
+//        if (!precioText.matches("^\\d+(\\.\\d+)?$")) {
+//            JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
+//            return;
+//        }
+//        if (!cantidadText.matches("\\d+")) {
+//            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número entero.");
+//            return;
+//        }
 
-        int cantidad = Integer.parseInt(cantidadText);
-        double precio = Double.parseDouble(precioText);
+//        int cantidad = Integer.parseInt(cantidadText);
+//        double precio = Double.parseDouble(precioText);
 
-        boolean estado = jrbEstado.isSelected();
 
         if (nom.isEmpty() || descripcion.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos");

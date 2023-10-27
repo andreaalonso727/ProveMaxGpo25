@@ -184,7 +184,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(jtTelef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jrEstado))
                 .addGap(18, 18, 18)
@@ -206,7 +206,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         if(opcion == JOptionPane.YES_OPTION){
         
             try{
-                int cuit = Integer.parseInt(jtCuit.getText());
+                String cuit = jtCuit.getText();
                 String razonSocial = jtRazonSocial.getText();
                 String domicilio = jtDomicilio.getText();
                 String telefono = jtTelef.getText();
@@ -241,7 +241,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
     private void jBBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscar1ActionPerformed
         try{
             
-        int cuit = Integer.parseInt(jtCuit.getText());
+        String cuit = jtCuit.getText();
         Proveedor prov = prove.buscarProveXCuit(cuit);
         
         jtRazonSocial.setText(prov.getRazonSocial()+"");
@@ -264,7 +264,7 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         String RazonSocial = jtRazonSocial.getText();
         Proveedor prov = prove.buscarProveXNomb(RazonSocial);
         
-        jtCuit.setText(prov.getCuit()+"");
+        jtCuit.setText(prov.getCuit());
         jtDomicilio.setText(prov.getDomicilio());
         jtTelef.setText(prov.getTelefono());
         jrEstado.setSelected(prov.isEstado());
@@ -296,15 +296,15 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         try{
             //Extraer los dato que se da en el view
             String razonSocial = jtRazonSocial.getText();
-            int cuit = Integer.parseInt(jtCuit.getText());
+            String cuit = jtCuit.getText();
             String domicilio = jtDomicilio.getText();
             String telefono = jtTelef.getText();
             boolean estado = jrEstado.isSelected();
             
-//            if (!razonSocial.matches("^\\d+(\\.\\d+)?$")) {
-//            JOptionPane.showMessageDialog(this, "La Razon Social debe ser solo caracteres.");
-//            return;
-//        }
+            if (!cuit.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Cuit debe ser solo numeros.");
+            return;
+        }
             
             if (!telefono.matches("\\d+")) {
             JOptionPane.showMessageDialog(this, "La cantidad debe ser solo números.");

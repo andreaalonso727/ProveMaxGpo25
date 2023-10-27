@@ -52,7 +52,6 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Usuario:");
 
-        jUsuario.setText("admin");
         jUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUsuarioActionPerformed(evt);
@@ -76,8 +75,6 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña:");
-
-        jPass.setText("grupo25");
 
         jbtnSalir.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jbtnSalir.setForeground(new java.awt.Color(255, 0, 0));

@@ -13,7 +13,7 @@ public class Proveedor {
     
     private int idProveedor;
     private String razonSocial;
-    private int cuit;
+    private String cuit;
     private String domicilio;
     private String telefono;
     private boolean estado;
@@ -21,7 +21,7 @@ public class Proveedor {
     public Proveedor() {
     }
 
-    public Proveedor(String razonSocial, int cuit, String domicilio, String telefono, boolean estado) {
+    public Proveedor(String razonSocial, String cuit, String domicilio, String telefono, boolean estado) {
         this.razonSocial = razonSocial;
         this.cuit = cuit;
         this.domicilio = domicilio;
@@ -29,7 +29,7 @@ public class Proveedor {
         this.estado = estado;
     }
 
-    public Proveedor(int idProveedor, String razonSocial, int cuit, String domicilio, String telefono, boolean estado) {
+    public Proveedor(int idProveedor, String razonSocial, String cuit, String domicilio, String telefono, boolean estado) {
         this.idProveedor = idProveedor;
         this.razonSocial = razonSocial;
         this.cuit = cuit;
@@ -54,11 +54,11 @@ public class Proveedor {
         this.razonSocial = razonSocial;
     }
 
-    public int getCuit() {
+    public String getCuit() {
         return cuit;
     }
 
-    public void setCuit(int cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
 
