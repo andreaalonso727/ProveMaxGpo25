@@ -64,7 +64,6 @@ public class IngresarProducto extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar Producto"));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jLabel1.setText("Nombre");
 

@@ -50,7 +50,6 @@ public class ProductoEntreFechas extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createTitledBorder("Productos entre Fechas"));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setText("Seleccione Fechas:");

@@ -146,6 +146,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPass">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPassActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbtnSalir">
           <Properties>

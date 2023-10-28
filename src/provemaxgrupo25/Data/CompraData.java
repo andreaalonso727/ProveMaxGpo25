@@ -117,7 +117,7 @@ public class CompraData {
     
     public List<Compra> listarCompra (){
             
-        String sql="SELECT prov.razonSocial, com.idCompra, com.idProveedor, com.fecha FROM compra com JOIN proveedor prov ON com.idProveedor = prov.idProveedor ORDER BY com.idCompra";
+        String sql="SELECT prov.razonSocial, com.idCompra, com.idProveedor, com.fecha FROM compra com JOIN proveedor prov ON com.idProveedor = prov.idProveedor ORDER BY com.fecha";
        
         ArrayList<Compra> compras= new ArrayList<>();
         

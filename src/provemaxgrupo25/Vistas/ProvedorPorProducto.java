@@ -50,7 +50,6 @@ public class ProvedorPorProducto extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor por Producto"));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jCListaProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +104,7 @@ public class ProvedorPorProducto extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();

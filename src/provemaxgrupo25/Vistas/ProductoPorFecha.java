@@ -46,7 +46,6 @@ public class ProductoPorFecha extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createTitledBorder("Producto por Fecha"));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setMinimumSize(new java.awt.Dimension(550, 400));
         setPreferredSize(new java.awt.Dimension(550, 400));
 

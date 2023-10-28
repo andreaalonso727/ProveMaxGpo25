@@ -48,7 +48,7 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             model = new DefaultTableModel(){
                 @Override
                 public boolean isCellEditable(int fila, int col) {
-                    return col != 0; 
+                    return false; 
                 }
                 
             };
@@ -92,10 +92,10 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
         jtProductos = new javax.swing.JTable();
         jbtnAgCarrito = new javax.swing.JButton();
         jbtnSaCarrito1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jbtnIngresar.setText("Ingresar Pedido");
         jbtnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -132,6 +132,11 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtProductos.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jtProductosPropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtProductos);
 
         jbtnAgCarrito.setText("Agregar al carrito");
@@ -218,8 +223,12 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbtnIngresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("COMPRA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,13 +238,15 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -256,12 +267,10 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             compData.guardarCompra(compra);
 
             for (DetalleCompra detalle : carrito) {
-            detalle.setCompra(compra); // Asigna la compra principal a cada detalle
+            detalle.setCompra(compra); 
             detData.guardarDetalleCompra(detalle);
             }
             
-
-            // Limpia el carrito y la tabla del carrito
             carrito.clear();
             actualizarTablaCarrito();;
 
@@ -279,10 +288,10 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             double precio = Double.parseDouble(jtfPrecio.getText());
             int cantidad = Integer.parseInt(jtfCantidad.getText());
 
-            DetalleCompra detalle = new DetalleCompra(cantidad, precio, null, prod); // Aquí asumo que "null" para la compra, ya que se agregará a la compra principal más tarde.
+            DetalleCompra detalle = new DetalleCompra(cantidad, precio, null, prod); 
 
-            carrito.add(detalle); // Agrega el detalle al carrito
-            actualizarTablaCarrito(); // Actualiza la tabla del carrito
+            carrito.add(detalle); 
+            actualizarTablaCarrito();
             
             jtfCantidad.setText("");
             jtfPrecio.setText("");
@@ -300,6 +309,7 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
             int filaSelec = jtProductos.getSelectedRow();
             
             if(filaSelec !=-1){ 
+                carrito.remove(filaSelec);
                 model.removeRow(filaSelec);
 
             }else {
@@ -310,6 +320,11 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbtnSaCarrito1ActionPerformed
 
+    private void jtProductosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtProductosPropertyChange
+
+    }//GEN-LAST:event_jtProductosPropertyChange
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -317,6 +332,7 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnAgCarrito;
@@ -368,5 +384,9 @@ public class IngresarCompras extends javax.swing.JInternalFrame {
     private void borrarFilaTabla(){
         model.setRowCount(0);
         jtProductos.repaint();
+    }
+    
+    private void CambiarAlgo(){
+        
     }
 }

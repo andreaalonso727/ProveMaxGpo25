@@ -57,7 +57,6 @@ public class IngresarProveedor extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedores"));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jLabel1.setText("CUIT:");
 

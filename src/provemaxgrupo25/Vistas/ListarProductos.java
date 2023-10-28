@@ -61,7 +61,6 @@ public class ListarProductos extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Productos"));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jtListarProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

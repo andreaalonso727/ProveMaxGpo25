@@ -76,6 +76,12 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña:");
 
+        jPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPassActionPerformed(evt);
+            }
+        });
+
         jbtnSalir.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jbtnSalir.setForeground(new java.awt.Color(255, 0, 0));
         jbtnSalir.setText("X");
@@ -151,7 +157,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUsuarioActionPerformed
-        // TODO add your handling code here:
+        jPass.requestFocus();
     }//GEN-LAST:event_jUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -178,6 +184,23 @@ public class Login extends javax.swing.JFrame {
     private void jbtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jbtnSalirActionPerformed
+
+    private void jPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPassActionPerformed
+        String Usuario="admin";
+        String Contraseña="grupo25";
+        String Pass=new String(jPass.getPassword());
+        if(jUsuario.getText().equals(Usuario)&& Pass.equals(Contraseña)){
+
+            Principal log=new Principal();
+            log.setVisible(true);
+            dispose();
+
+        }
+        else{
+
+            JOptionPane.showMessageDialog(this, "Usuario / Contraseña incorrecta");
+        }
+    }//GEN-LAST:event_jPassActionPerformed
 
     /**
      * @param args the command line arguments

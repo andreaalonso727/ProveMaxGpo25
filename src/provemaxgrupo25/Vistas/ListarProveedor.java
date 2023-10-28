@@ -59,7 +59,6 @@ public class ListarProveedor extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jTlistProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

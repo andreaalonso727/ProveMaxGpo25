@@ -61,7 +61,6 @@ public class IngresarVenta extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -157,8 +156,7 @@ public class IngresarVenta extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -200,12 +198,20 @@ public class IngresarVenta extends javax.swing.JInternalFrame {
                 String prod = jcbProducto.getSelectedItem().toString();
                 Producto producto = produData.buscarProdNombre(prod);
                 
-                producto.setStock(producto.getStock() - cantidad);
-                produData.ModificarProducto(producto);
-                
-                JOptionPane.showMessageDialog(this, "se vendio " + cantidad + " unidades de " + producto.getNombreProd());
+                if((producto.getStock()-cantidad) >= 0){
+                    
+                    producto.setStock(producto.getStock() - cantidad);
+                    produData.ModificarProducto(producto);
+                    JOptionPane.showMessageDialog(this, "se vendio " + cantidad + " unidades de " + producto.getNombreProd());
+                    if(producto.getStock() == 0){
+                        JOptionPane.showMessageDialog(this, "Producto se quedo sin stock");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Cantidad sobrepasa el stock del producto");
+                }
                 
                 limpiarCampos();
+                
             }
         
         }catch(NumberFormatException e){
